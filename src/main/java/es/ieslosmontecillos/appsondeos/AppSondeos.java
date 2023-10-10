@@ -10,8 +10,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import static javafx.scene.paint.Color.LIGHTSTEELBLUE;
 
 /**
  *
@@ -21,23 +27,26 @@ public class AppSondeos extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
+
         StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
+
         Scene scene = new Scene(root, 300, 250);
         
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
+
+        TabPane tabPane = new TabPane();
+        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+
+
+        Foods foods = new Foods();
+        Readings readings = new Readings();
+        foods.setText("Foods");
+        readings.setText("Readings");
+        tabPane.getTabs().add(foods);
+        tabPane.getTabs().add(readings);
+
+root.getChildren().add(tabPane);
         primaryStage.show();
     }
 
