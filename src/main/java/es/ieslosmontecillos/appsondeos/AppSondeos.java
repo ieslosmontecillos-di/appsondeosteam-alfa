@@ -4,17 +4,10 @@
  * and open the template in the editor.
  */
 package es.ieslosmontecillos.appsondeos;
-
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import static javafx.scene.paint.Color.LIGHTSTEELBLUE;

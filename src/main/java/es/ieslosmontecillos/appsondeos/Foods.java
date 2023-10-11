@@ -60,15 +60,18 @@ public class Foods extends Tab {
         root=new VBox();
 
         vBox1=new VBox();
+        vBox1.setId("vBox1");
             hbox1_1=new HBox();
             hbox1_2=new HBox();
             hbox1_3=new HBox();
 
         vBox2=new VBox();
+        vBox2.setId("vBox2");
             hbox2_1=new HBox();
             hbox2_2=new HBox();
 
         vBox3=new VBox();
+        vBox3.setId("vBox3");
         hbox3_1=new HBox();
         hbox3_2=new HBox();
         hbox3_3=new HBox();
@@ -110,9 +113,9 @@ public class Foods extends Tab {
 
         radioButton1=new RadioButton();
         radioButton2=new RadioButton();
-        slider1=new Slider(0,100,5);
-        slider2=new Slider(0,100,5);
-        slider3=new Slider(0,100,5);
+        slider1=new Slider(0,10,5);
+        slider2=new Slider(0,10,5);
+        slider3=new Slider(0,10,5);
          // End
 
 
@@ -180,13 +183,21 @@ public class Foods extends Tab {
 
 
         lbl11.textProperty().bindBidirectional(slider1.valueProperty(), NumberFormat.getNumberInstance());
-        slider1.setShowTickMarks(true); // Habilitar las marcas de paso
-        slider1.setMajorTickUnit(1); // Incremento de las marcas de paso
-        slider1.setShowTickLabels(true); // Habilitar las etiquetas de las marcas de paso
+        slider1.setShowTickMarks(true);
+        slider1.setMajorTickUnit(1);
+        slider1.setShowTickLabels(true);
 
 
         lbl13.textProperty().bindBidirectional(slider2.valueProperty(), NumberFormat.getNumberInstance());
+        slider2.setShowTickMarks(true);
+        slider2.setMajorTickUnit(1);
+        slider2.setShowTickLabels(true);
+
         lbl15.textProperty().bindBidirectional(slider3.valueProperty(), NumberFormat.getNumberInstance());
+        slider3.setShowTickMarks(true);
+        slider3.setMajorTickUnit(1);
+        slider3.setShowTickLabels(true);
+
         checkBox1.setOnAction(e-> hbox2_2.setVisible(checkBox1.isSelected()));
 
         vBox3.getChildren().addAll(hbox3_1, hbox3_2, hbox3_3, hbox3_4);
@@ -194,6 +205,9 @@ public class Foods extends Tab {
 
         root.getStylesheets().add(Foods.class.getResource("css/Foods.css").toExternalForm());
         root.setId("main");
+        vBox1.setId("vBox1");
+        vBox2.setId("vBox2");
+        vBox3.setId("vBox3");
 
         setContent(root);
     }
