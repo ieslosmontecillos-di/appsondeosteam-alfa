@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package es.ieslosmontecillos.appsondeos;
-
 import javafx.application.Application;
 
 import javafx.scene.Scene;
@@ -29,6 +28,7 @@ import java.io.FileNotFoundException;
 public class AppSondeos extends Application {
   
     @Override
+
     public void start(Stage primaryStage) throws FileNotFoundException {
 
         BorderPane root = new BorderPane();
@@ -132,6 +132,7 @@ public class AppSondeos extends Application {
                 primaryStage.close();
             }
         });
+
     }
 
     /**
