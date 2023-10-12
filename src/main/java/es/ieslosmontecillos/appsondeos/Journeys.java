@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class Journeys extends Tab
+public class Journeys extends Survey
 {
     //Elements for Journeys Tab
     private GridPane grid;
@@ -100,6 +100,16 @@ public class Journeys extends Tab
         grid.add(frecHB, 0, 2, 1, 1);
 
         setContent(grid);
+    }
+
+    @Override
+    boolean validateSurvey() {
+        return false;
+    }
+
+    @Override
+    void createSCVFile() {
+
     }
 
     public void addEvents()
