@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import java.text.NumberFormat;
 
-public class Foods extends Tab {
+public class Foods extends Survey {
 
     private VBox root;
      private VBox vBox1;
@@ -50,11 +50,12 @@ public class Foods extends Tab {
     private Slider slider3;
 
     public Foods(){
+        setText("Comidas");
        makeGUI();
 
     }
-
-    private void makeGUI() {
+    @Override
+    public void makeGUI() {
 
          //here we instance every attrib of the class.
         root=new VBox();
@@ -203,13 +204,23 @@ public class Foods extends Tab {
         vBox3.getChildren().addAll(hbox3_1, hbox3_2, hbox3_3, hbox3_4);
         root.getChildren().addAll(vBox1,vBox2,vBox3);
 
-        root.getStylesheets().add(Foods.class.getResource("css/Foods.css").toExternalForm());
-        root.setId("main");
+       // root.getStylesheets().add(Foods.class.getResource("css/Fcss").toExternalForm());
+        //root.setId("main");
         vBox1.setId("vBox1");
         vBox2.setId("vBox2");
         vBox3.setId("vBox3");
 
         setContent(root);
+    }
+
+    @Override
+    boolean validateSurvey() {
+        return false;
+    }
+
+    @Override
+    void createSCVFile() {
+
     }
 
 }
