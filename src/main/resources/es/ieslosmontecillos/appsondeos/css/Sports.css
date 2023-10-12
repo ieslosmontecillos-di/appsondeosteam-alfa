@@ -1,0 +1,10 @@
+*
+{
+    -fx-text-fill: white;
+}
+
+#main
+{
+    -fx-background-image: url("../img/bgSports.jpg");
+    -fx-text-fill: #FFFFFF;
+}
