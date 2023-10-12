@@ -14,19 +14,7 @@ import java.text.NumberFormat;
 
 public class Foods extends Survey {
 
-    private VBox root;
-     private VBox vBox1;
-    private HBox hbox1_1;
-    private HBox hbox1_2;
-    private HBox hbox1_3;
-    private VBox vBox2;
-    private  HBox hbox2_1;
-    private  HBox hbox2_2;
-    private VBox vBox3;
-    private HBox hbox3_1;
-    private HBox hbox3_2;
-    private HBox hbox3_3;
-    private HBox hbox3_4;
+
 
     private TextField txt1;
     private ComboBox<String>  combo1;
@@ -58,26 +46,27 @@ public class Foods extends Survey {
     public void makeGUI() {
 
          //here we instance every attrib of the class.
-        root=new VBox();
+        VBox root = new VBox();
 
-        vBox1=new VBox();
+        VBox vBox1 = new VBox();
         vBox1.setId("vBox1");
-            hbox1_1=new HBox();
-            hbox1_2=new HBox();
-            hbox1_3=new HBox();
+        HBox hbox1_1 = new HBox();
+        HBox hbox1_2 = new HBox();
+        HBox hbox1_3 = new HBox();
 
-        vBox2=new VBox();
+        VBox vBox2 = new VBox();
         vBox2.setId("vBox2");
-            hbox2_1=new HBox();
-            hbox2_2=new HBox();
+        HBox hbox2_1 = new HBox();
+        HBox hbox2_2=new HBox();
 
-        vBox3=new VBox();
+        VBox vBox3 = new VBox();
         vBox3.setId("vBox3");
-        hbox3_1=new HBox();
-        hbox3_2=new HBox();
-        hbox3_3=new HBox();
-        hbox3_4=new HBox();
+        HBox hbox3_1 = new HBox();
+        HBox hbox3_2 = new HBox();
+        HBox hbox3_3 = new HBox();
+        HBox hbox3_4 = new HBox();
 
+        Button sendButton=new Button("Enviar");
 
         Label lbl1 = new Label();
         Label lbl2 = new Label();
@@ -149,7 +138,7 @@ public class Foods extends Survey {
         hbox1_3.getChildren().addAll(lbl4, lbl5,radioButton1, lbl6,radioButton2);
 
 
-        vBox1.getChildren().addAll(hbox1_1,hbox1_2,hbox1_3);
+        vBox1.getChildren().addAll(hbox1_1, hbox1_2, hbox1_3);
         //end of the first third of the survey
 
 
@@ -202,7 +191,7 @@ public class Foods extends Survey {
         checkBox1.setOnAction(e-> hbox2_2.setVisible(checkBox1.isSelected()));
 
         vBox3.getChildren().addAll(hbox3_1, hbox3_2, hbox3_3, hbox3_4);
-        root.getChildren().addAll(vBox1,vBox2,vBox3);
+        root.getChildren().addAll(vBox1, vBox2, vBox3);
 
        // root.getStylesheets().add(Foods.class.getResource("css/Fcss").toExternalForm());
         //root.setId("main");
@@ -210,11 +199,20 @@ public class Foods extends Survey {
         vBox2.setId("vBox2");
         vBox3.setId("vBox3");
 
+        root.getChildren().add(sendButton);
         setContent(root);
+
+        sendButton.setOnAction(actionEvent -> validateSurvey());
     }
 
     @Override
     boolean validateSurvey() {
+
+        String text = txt1.getText();
+        if (text.isEmpty()){
+            txt1.getText();
+        }
+        createSCVFile();
         return false;
     }
 
