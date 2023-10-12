@@ -18,6 +18,7 @@ public class Readings extends Tab {
 
 
     public Readings(){
+        setText("Lecturas");
         makeGUI();
 
     }

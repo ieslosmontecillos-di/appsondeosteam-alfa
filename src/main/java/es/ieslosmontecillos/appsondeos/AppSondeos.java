@@ -86,19 +86,19 @@ public class AppSondeos extends Application {
 
         /* TabPane */
         TabPane tabPane = new TabPane();
-        Tab sports = new Tab("Deportes");
+        Tab sports = new Sports();
         sports.closableProperty().setValue(false);
         tabPane.getTabs().add(sports);
         Tab animals = new Tab("Animales");
         animals.closableProperty().setValue(false);
         tabPane.getTabs().add(animals);
-        Tab meats = new Tab("Comidas");
+        Tab meats = new Foods();
         meats.closableProperty().setValue(false);
         tabPane.getTabs().add(meats);
-        Tab trips = new Tab("Viajes");
+        Tab trips = new Journeys();
         trips.closableProperty().setValue(false);
         tabPane.getTabs().add(trips);
-        Tab readings = new Tab("Lecturas");
+        Tab readings = new Readings();
         readings.closableProperty().setValue(false);
         tabPane.getTabs().add(readings);
 
