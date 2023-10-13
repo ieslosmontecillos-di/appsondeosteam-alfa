@@ -10,73 +10,69 @@ package es.ieslosmontecillos.appsondeos;
 import javafx.collections.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.NumberFormat;
 
-public class Foods extends Tab {
+public class Foods extends Survey {
 
     private VBox root;
-     private VBox vBox1;
-    private HBox hbox1_1;
-    private HBox hbox1_2;
-    private HBox hbox1_3;
-    private VBox vBox2;
-    private  HBox hbox2_1;
-    private  HBox hbox2_2;
-    private VBox vBox3;
-    private HBox hbox3_1;
-    private HBox hbox3_2;
-    private HBox hbox3_3;
-    private HBox hbox3_4;
 
     private TextField txt1;
-    private ComboBox<String>  combo1;
+    private ComboBox<String> combo1;
 
-    private ComboBox<String>  combo2;
-    private ComboBox<String>  combo3;
+    private ComboBox<String> combo2;
+    private ComboBox<String> combo3;
 
-    private  CheckBox checkBox1;
+    private CheckBox checkBox1;
 
 
     private ObservableList<String> flavours;
-    private ObservableList<String>  dailyMeals;
+    private ObservableList<String> dailyMeals;
     private ObservableList<String> diet;
 
     private ToggleGroup toggleGroup;
 
     private RadioButton radioButton1;
-    private  RadioButton radioButton2;
+    private RadioButton radioButton2;
     private Slider slider1;
     private Slider slider2;
     private Slider slider3;
+    private Label lbl16 = new Label();
 
-    public Foods(){
-       makeGUI();
+    public Foods() {
+        setText("Comidas");
+        makeGUI();
 
     }
 
-    private void makeGUI() {
+    @Override
+    public void makeGUI() {
 
-         //here we instance every attrib of the class.
-        root=new VBox();
+        //here we instance every attrib of the class.
+        root = new VBox();
 
-        vBox1=new VBox();
+        VBox vBox1 = new VBox();
         vBox1.setId("vBox1");
-            hbox1_1=new HBox();
-            hbox1_2=new HBox();
-            hbox1_3=new HBox();
+        HBox hbox1_1 = new HBox();
+        HBox hbox1_2 = new HBox();
+        HBox hbox1_3 = new HBox();
 
-        vBox2=new VBox();
+        VBox vBox2 = new VBox();
         vBox2.setId("vBox2");
-            hbox2_1=new HBox();
-            hbox2_2=new HBox();
+        HBox hbox2_1 = new HBox();
+        HBox hbox2_2 = new HBox();
 
-        vBox3=new VBox();
+        VBox vBox3 = new VBox();
         vBox3.setId("vBox3");
-        hbox3_1=new HBox();
-        hbox3_2=new HBox();
-        hbox3_3=new HBox();
-        hbox3_4=new HBox();
+        HBox hbox3_1 = new HBox();
+        HBox hbox3_2 = new HBox();
+        HBox hbox3_3 = new HBox();
+        HBox hbox3_4 = new HBox();
 
+        Button sendButton = new Button("Enviar");
 
         Label lbl1 = new Label();
         Label lbl2 = new Label();
@@ -95,34 +91,33 @@ public class Foods extends Tab {
         Label lbl15 = new Label();
 
 
-        txt1=new TextField();
+        txt1 = new TextField();
 
-        checkBox1=new CheckBox();
+        checkBox1 = new CheckBox();
 
-        flavours=FXCollections.observableArrayList();
-        dailyMeals=FXCollections.observableArrayList();
-        diet=FXCollections.observableArrayList();
+        flavours = FXCollections.observableArrayList();
+        dailyMeals = FXCollections.observableArrayList();
+        diet = FXCollections.observableArrayList();
 
-        combo1= new ComboBox<>(flavours);
-        combo2= new ComboBox<>(dailyMeals);
-        combo3= new ComboBox<>(diet);
-
+        combo1 = new ComboBox<>(flavours);
+        combo2 = new ComboBox<>(dailyMeals);
+        combo3 = new ComboBox<>(diet);
 
 
         toggleGroup = new ToggleGroup();
 
-        radioButton1=new RadioButton();
-        radioButton2=new RadioButton();
-        slider1=new Slider(0,10,5);
-        slider2=new Slider(0,10,5);
-        slider3=new Slider(0,10,5);
-         // End
+        radioButton1 = new RadioButton();
+        radioButton2 = new RadioButton();
+        slider1 = new Slider(0, 10, 5);
+        slider2 = new Slider(0, 10, 5);
+        slider3 = new Slider(0, 10, 5);
+        // End
 
 
         //Adding the options of the checkboxs
-        flavours.addAll("Dulce","Salado","Amargo","Ácido","Umami");
-        dailyMeals.addAll("Dos o menos","Tres o cuatro","Cinco o más");
-        diet.addAll("Vegana","Vegetariana","Sin lactosa","Sin gluten","Sin huevo","Islámica","Judía","India","Sin frutos secos","Sin soja","Sin Carne","Sin marisco");
+        flavours.addAll("Dulce", "Salado", "Amargo", "Ácido", "Umami");
+        dailyMeals.addAll("Dos o menos", "Tres o cuatro", "Cinco o más");
+        diet.addAll("Vegana", "Vegetariana", "Sin lactosa", "Sin gluten", "Sin huevo", "Islámica", "Judía", "India", "Sin frutos secos", "Sin soja", "Sin Carne", "Sin marisco");
         //End
 
 
@@ -135,22 +130,21 @@ public class Foods extends Tab {
 
         lbl1.setText("¿Cuál es tu comida favorita?");
 
-        hbox1_1.getChildren().addAll(lbl1,txt1);
+        hbox1_1.getChildren().addAll(lbl1, txt1);
 
         lbl2.setText("¿Cuál es tu sabor favorito?");
         lbl3.setText("¿cuantas comidas diarias haces?");
-        hbox1_2.getChildren().addAll(lbl2,combo1, lbl3, combo2);
+        hbox1_2.getChildren().addAll(lbl2, combo1, lbl3, combo2);
 
         lbl4.setText("¿Consideras que haces buena comida?");
         lbl5.setText("Sí:");
         lbl6.setText("No:");
 
-        hbox1_3.getChildren().addAll(lbl4, lbl5,radioButton1, lbl6,radioButton2);
+        hbox1_3.getChildren().addAll(lbl4, lbl5, radioButton1, lbl6, radioButton2);
 
 
-        vBox1.getChildren().addAll(hbox1_1,hbox1_2,hbox1_3);
+        vBox1.getChildren().addAll(hbox1_1, hbox1_2, hbox1_3);
         //end of the first third of the survey
-
 
 
         //Second third of the survey
@@ -162,8 +156,7 @@ public class Foods extends Tab {
         hbox2_2.setVisible(false);
 
 
-
-        vBox2.getChildren().addAll(hbox2_1,hbox2_2);
+        vBox2.getChildren().addAll(hbox2_1, hbox2_2);
 
         //end of the second third of the survey
 
@@ -177,9 +170,9 @@ public class Foods extends Tab {
 
         hbox3_1.getChildren().add(lbl9);
 
-        hbox3_2.getChildren().addAll(lbl10,slider1, lbl11);
-        hbox3_3.getChildren().addAll(lbl12,slider2, lbl13);
-        hbox3_4.getChildren().addAll(lbl14,slider3, lbl15);
+        hbox3_2.getChildren().addAll(lbl10, slider1, lbl11);
+        hbox3_3.getChildren().addAll(lbl12, slider2, lbl13);
+        hbox3_4.getChildren().addAll(lbl14, slider3, lbl15);
 
 
         lbl11.textProperty().bindBidirectional(slider1.valueProperty(), NumberFormat.getNumberInstance());
@@ -198,10 +191,10 @@ public class Foods extends Tab {
         slider3.setMajorTickUnit(1);
         slider3.setShowTickLabels(true);
 
-        checkBox1.setOnAction(e-> hbox2_2.setVisible(checkBox1.isSelected()));
+        checkBox1.setOnAction(e -> hbox2_2.setVisible(checkBox1.isSelected()));
 
         vBox3.getChildren().addAll(hbox3_1, hbox3_2, hbox3_3, hbox3_4);
-        root.getChildren().addAll(vBox1,vBox2,vBox3);
+        root.getChildren().addAll(vBox1, vBox2, vBox3);
 
         root.getStylesheets().add(Foods.class.getResource("css/Foods.css").toExternalForm());
         root.setId("main");
@@ -209,12 +202,41 @@ public class Foods extends Tab {
         vBox2.setId("vBox2");
         vBox3.setId("vBox3");
 
+        root.getChildren().add(sendButton);
+
+        root.getChildren().add(lbl16);
         setContent(root);
+
+        sendButton.setOnAction(actionEvent -> validateSurvey());
     }
 
+    @Override
+    boolean validateSurvey() {
+        int contadorDeErrores = 0;
+        String text = txt1.getText();
+        if (text.isEmpty()) contadorDeErrores++;
+        if (combo1.getValue() == null) contadorDeErrores++;
+        if (combo2.getValue() == null) contadorDeErrores++;
+        if (toggleGroup.getSelectedToggle() == null) contadorDeErrores++;
+        System.out.println(contadorDeErrores);
+
+        if (contadorDeErrores == 0) {
+            createSCVFile(getData(),"Comidas");
+        }
+
+        return true;
+    }
+
+    @Override
+    String getData() {
+        return txt1.getText() + ";" + combo1.getValue() + ";" + combo2.getValue() + ";" + combo3.getValue() + ";" + toggleGroup.getSelectedToggle() + ";" + Math.floor(slider1.getValue() * 100) / 100 + ";" + Math.floor(slider2.getValue() * 100) / 100 + ";" + Math.floor(slider1.getValue() * 100) / 100 + ";";
+
+    }
+
+    void createSCVFile(String datos, String surveyName) {
+        super.createSCVFile(datos, surveyName);
+    }
 }
-
-
 /*
 *
 * método para validar esta clase

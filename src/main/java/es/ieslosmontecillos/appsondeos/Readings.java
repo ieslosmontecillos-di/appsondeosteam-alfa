@@ -6,7 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
-public class Readings extends Tab {
+public class Readings extends Survey {
 
 
     StackPane root;
@@ -18,11 +18,12 @@ public class Readings extends Tab {
 
 
     public Readings(){
+        setText("Lecturas");
         makeGUI();
 
     }
 
-    private void makeGUI() {
+    public void makeGUI() {
 
         hbox=new HBox();
         root=new StackPane();
@@ -37,4 +38,15 @@ public class Readings extends Tab {
 
         this.setContent(root);
     }
+
+    @Override
+    boolean validateSurvey() {
+        return false;
+    }
+
+    @Override
+    String getData() {
+        return null;
+    }
+
 }

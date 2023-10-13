@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
-public class Sports extends Tab
+public class Sports extends Survey
 {
     //Elements for Sports Tab
     private GridPane grid;
@@ -160,6 +160,16 @@ public class Sports extends Tab
 
         //We add the GridPane to this Tab
         setContent(grid);
+    }
+
+    @Override
+    boolean validateSurvey() {
+        return false;
+    }
+
+    @Override
+    String getData() {
+        return null;
     }
 
     public void addEvents()
