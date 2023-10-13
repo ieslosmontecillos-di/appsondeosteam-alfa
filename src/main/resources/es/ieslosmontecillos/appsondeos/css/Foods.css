@@ -1,8 +1,5 @@
 #main {
-    -fx-background-image:url("./../images/FoodBg.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: 100%;
-    -fx-background-position: center center;
+
 }
 
 
@@ -14,4 +11,9 @@
 }
 #vBox3{
     -fx-background-color: rgba(204, 204, 204, 0.31);
+}
+.Label#lbl16{
+
+    -fx-text-fill: #ffcccc;
+
 }

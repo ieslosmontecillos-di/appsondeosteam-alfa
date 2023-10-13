@@ -168,8 +168,8 @@ public class Sports extends Survey
     }
 
     @Override
-    void createSCVFile() {
-
+    String getData() {
+        return null;
     }
 
     public void addEvents()

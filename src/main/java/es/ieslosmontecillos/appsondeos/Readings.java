@@ -45,7 +45,8 @@ public class Readings extends Survey {
     }
 
     @Override
-    void createSCVFile() {
-
+    String getData() {
+        return null;
     }
+
 }

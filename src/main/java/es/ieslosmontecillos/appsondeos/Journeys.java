@@ -104,10 +104,17 @@ public class Journeys extends Survey
 
     @Override
     boolean validateSurvey() {
+
+
+
         return false;
     }
 
     @Override
+    String getData() {
+        return null;
+    }
+
     void createSCVFile() {
 
     }
