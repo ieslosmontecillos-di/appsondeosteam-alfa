@@ -44,7 +44,7 @@ public class Animals extends Survey{
     private VBox vbox4;
     private Label lbl5;
     private Slider slider1;
-    private TextField txt2;
+    private Label lblSlider;
     private HBox hbox2;
 
     // 5
@@ -93,7 +93,7 @@ public class Animals extends Survey{
         cbx2 = new CheckBox("El coste de adiestramiento y cuidado del animal");
         cbx3 = new CheckBox("El carácter particular del animal");
         cbx4 = new CheckBox("El precio de adopción del animal");
-        txt1 = new TextField("");
+        txt1 = new TextField();
         txt1.setMinWidth(250);
         Label lbl21 = new Label("Otro: ");
         HBox hbox1 = new HBox();
@@ -139,19 +139,19 @@ public class Animals extends Survey{
         slider1.setShowTickLabels(true);
         slider1.setSnapToTicks(true);
         slider1.setMajorTickUnit(5);
-        slider1.setMinWidth(250);
-        txt2 = new TextField();
-        txt2.setEditable(false);
-        txt2.setMaxWidth(45); // Seguir por aquí
-        txt2.textProperty().bindBidirectional(slider1.valueProperty(), NumberFormat.getNumberInstance());
+        slider1.setMinWidth(300);
+        slider1.setMinorTickCount(4);
+        lblSlider = new Label();
+        lblSlider.setMaxWidth(45);
+        lblSlider.textProperty().bindBidirectional(slider1.valueProperty(), NumberFormat.getNumberInstance());
         hbox2 = new HBox();
-        hbox2.getChildren().addAll(slider1, txt2);
+        hbox2.getChildren().addAll(slider1, lblSlider);
         grid.add(lbl5, 0, 4);
         grid.add(hbox2, 1, 4);
 
         lbl5.setVisible(false);
         slider1.setVisible(false);
-        txt2.setVisible(false);
+        lblSlider.setVisible(false);
 
         // 5
         lbl6 = new Label("¿Es alérgico a algún animal?");
@@ -193,7 +193,7 @@ public class Animals extends Survey{
                 {
                     lbl5.setVisible(true);
                     slider1.setVisible(true);
-                    txt2.setVisible(true);
+                    lblSlider.setVisible(true);
                 }
 
             }
@@ -206,7 +206,7 @@ public class Animals extends Survey{
                 {
                     lbl5.setVisible(false);
                     slider1.setVisible(false);
-                    txt2.setVisible(false);
+                    lblSlider.setVisible(false);
                 }
 
             }
@@ -246,7 +246,7 @@ public class Animals extends Survey{
                 }
                 else
                 {
-                    lblInfo.setText("Error al enviar la encuesta");
+                    lblInfo.setText("Error: Elige al menos una opción por pregunta");
                 }
             }
         });
@@ -254,7 +254,20 @@ public class Animals extends Survey{
     }
     @Override
     boolean validateSurvey() {
-        return false;
+        if(toggle1.getSelectedToggle() == null)
+            return false;
+        if(!cbx1.isSelected() && !cbx2.isSelected() && !cbx3.isSelected() && !cbx4.isSelected() && txt1.getText().isEmpty())
+            return false;
+        if(toggle2.getSelectedToggle() == null)
+            return false;
+        if(toggle3.getSelectedToggle() == null)
+            return false;
+        if(toggle4.getSelectedToggle() == null)
+            return false;
+        else if(rdb8.isSelected() && combo1.getSelectionModel().getSelectedItem() == null)
+            return false;
+
+        return true;
     }
 
     @Override
