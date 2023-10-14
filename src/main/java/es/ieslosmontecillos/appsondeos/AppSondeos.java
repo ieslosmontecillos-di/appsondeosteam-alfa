@@ -26,7 +26,7 @@ import java.io.FileNotFoundException;
  * @author Alpha Team
  */
 public class AppSondeos extends Application {
-  
+
     @Override
 
     public void start(Stage primaryStage) throws FileNotFoundException {
@@ -82,7 +82,7 @@ public class AppSondeos extends Application {
 
         /** Segunda Escena*/
         StackPane root2 = new StackPane();
-        Scene scene2 = new Scene(root2, 400, 700);
+        Scene scene2 = new Scene(root2, 600, 400);
 
         /* TabPane */
         TabPane tabPane = new TabPane();
