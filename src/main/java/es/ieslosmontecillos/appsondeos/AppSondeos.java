@@ -89,7 +89,7 @@ public class AppSondeos extends Application {
         Tab sports = new Sports();
         sports.closableProperty().setValue(false);
         tabPane.getTabs().add(sports);
-        Tab animals = new Tab("Animales");
+        Tab animals = new Animals();
         animals.closableProperty().setValue(false);
         tabPane.getTabs().add(animals);
         Tab meats = new Foods();
