@@ -23,10 +23,11 @@ public class Animals extends Survey{
     private ToggleGroup toggle1;
     // 2
     private Label lbl2;
-    private CheckBox cbx1;
-    private CheckBox cbx2;
-    private CheckBox cbx3;
-    private CheckBox cbx4;
+    private RadioButton rdb2_1;
+    private RadioButton rdb2_2;
+    private RadioButton rdb2_3;
+    private RadioButton rdb2_4;
+    private ToggleGroup toggle2_1;
     private TextField txt1;
     private VBox vbox2;
     // 3
@@ -57,6 +58,8 @@ public class Animals extends Survey{
     private ComboBox combo1;
 
     private Button btnSend;
+    private Button btnClean;
+    private HBox buttonPanel;
     private Label lblInfo;
     public Animals(){
         makeGUI();
@@ -88,18 +91,23 @@ public class Animals extends Survey{
         grid.add(vbox1, 1, 0);
 
         // 2
-        lbl2 = new Label("¿Qué necesitas saber antes\nde adoptar un animal?");
-        cbx1 = new CheckBox("Las necesidades de cuidado del animal");
-        cbx2 = new CheckBox("El coste de adiestramiento y cuidado del animal");
-        cbx3 = new CheckBox("El carácter particular del animal");
-        cbx4 = new CheckBox("El precio de adopción del animal");
+        lbl2 = new Label("¿Qué piensas antes\nde adoptar un animal?");
+        rdb2_1 = new RadioButton("Las necesidades de cuidado del animal");
+        rdb2_2 = new RadioButton("El coste de adiestramiento y cuidado del animal");
+        rdb2_3 = new RadioButton("El carácter particular del animal");
+        rdb2_4 = new RadioButton("El precio de adopción del animal");
+        toggle2_1 = new ToggleGroup();
+        rdb2_1.setToggleGroup(toggle2_1);
+        rdb2_2.setToggleGroup(toggle2_1);
+        rdb2_3.setToggleGroup(toggle2_1);
+        rdb2_4.setToggleGroup(toggle2_1);
         txt1 = new TextField();
-        txt1.setMinWidth(250);
+        txt1.setMinWidth(280);
         Label lbl21 = new Label("Otro: ");
         HBox hbox1 = new HBox();
         hbox1.getChildren().addAll(lbl21, txt1);
         vbox2 = new VBox();
-        vbox2.getChildren().addAll(cbx1, cbx2, cbx3, cbx4, hbox1);
+        vbox2.getChildren().addAll(rdb2_1, rdb2_2, rdb2_3, rdb2_4, hbox1);
 
         grid.add(lbl2, 0, 1);
         grid.add(vbox2, 1, 1);
@@ -174,10 +182,13 @@ public class Animals extends Survey{
         lbl7.setVisible(false);
         combo1.setVisible(false);
 
-        /*  Send button */
+        /*  Send and clean button */
         btnSend = new Button("Enviar");
+        btnClean = new Button("Limpiar");
         lblInfo = new Label();
-        grid.add(btnSend, 0, 7);
+        buttonPanel = new HBox();
+        buttonPanel.getChildren().addAll(btnClean, btnSend);
+        grid.add(buttonPanel, 0, 7);
         grid.add(lblInfo, 1, 7);
 
         setContent(grid);
@@ -250,13 +261,26 @@ public class Animals extends Survey{
                 }
             }
         });
+        btnClean.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                toggle1.selectToggle(null);
+                toggle2_1.selectToggle(null);
+                txt1.setText("");
+                toggle2.selectToggle(null);
+                toggle3.selectToggle(null);
+                slider1.setValue(5);
+                toggle4.selectToggle(null);
+                combo1.setValue(null);
+            }
+        });
 
     }
     @Override
     boolean validateSurvey() {
         if(toggle1.getSelectedToggle() == null)
             return false;
-        if(!cbx1.isSelected() && !cbx2.isSelected() && !cbx3.isSelected() && !cbx4.isSelected() && txt1.getText().isEmpty())
+        if(toggle2_1.getSelectedToggle() == null && txt1.getText().isEmpty())
             return false;
         if(toggle2.getSelectedToggle() == null)
             return false;
