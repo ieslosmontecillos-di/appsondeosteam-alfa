@@ -143,7 +143,6 @@ public class Animals extends Survey{
         // 4.2
         lbl5 = new Label("¿Cuanto tiempo\naproximadamente? (minutos)");
         slider1 = new Slider(5, 60, 0);
-        slider1.setShowTickMarks(true);
         slider1.setShowTickLabels(true);
         slider1.setSnapToTicks(true);
         slider1.setMajorTickUnit(5);
@@ -296,9 +295,15 @@ public class Animals extends Survey{
 
     @Override
     String getData(){
-        return toggle1.getSelectedToggle() + ";" + toggle2_1.getSelectedToggle() + ";"
-                + txt1.getText() + ";" + toggle2.getSelectedToggle() + ";" +
-                toggle3.getSelectedToggle() + ";" + slider1.getValue() + ";" +
-                toggle4.getSelectedToggle() + ";" + combo1.getValue();
+        RadioButton rd1 = (RadioButton)toggle1.getSelectedToggle();
+        RadioButton rd2_1 = (RadioButton)toggle2_1.getSelectedToggle();
+        RadioButton rd2 = (RadioButton)toggle2.getSelectedToggle();
+        RadioButton rd3 = (RadioButton)toggle3.getSelectedToggle();
+        RadioButton rd4 = (RadioButton)toggle4.getSelectedToggle();
+
+        return rd1.getText() + ";" + rd2_1.getText() + ";"
+                + txt1.getText() + ";" + rd2.getText() + ";" +
+                rd3.getText() + ";" + slider1.getValue() + ";" +
+                rd4.getText() + ";" + combo1.getValue();
     }
 }
