@@ -86,6 +86,8 @@ public class Sports extends Survey
 
         gridInfo = new GridPane();
         gridInfo.setVgap(5);
+        //We add the Class "container" from Sports.css
+        gridInfo.getStyleClass().add("container");
 
         //Title
         titleLbl1 = new Label("Información personal");
@@ -140,6 +142,8 @@ public class Sports extends Survey
         /* CONTAINER 2 */
 
         hb1 = new HBox(10);
+        //We add the Class "container" from Sports.css
+        hb1.getStyleClass().add("container");
 
         //Elements
 
@@ -171,6 +175,8 @@ public class Sports extends Survey
         //Container
         gridFrec = new GridPane();
         gridFrec.setVgap(5);
+        //We add the Class "container" from Sports.css
+        gridFrec.getStyleClass().add("container");
 
         //Elements
         titleLbl2 = new Label("Aficiones");
@@ -237,6 +243,8 @@ public class Sports extends Survey
 
         gridIMC = new GridPane();
         gridIMC.setVgap(5);
+        //We add the Class "container" from Sports.css
+        gridIMC.getStyleClass().add("container");
 
         imcTitle = new Label("IMC (Índice de Masa Corporal)");
         imcTitle.setFont(new Font(24));
@@ -274,12 +282,22 @@ public class Sports extends Survey
         //We add the Grid of IMC to the Main Grid
         mainGrid.add(gridIMC, 0, 6, 1, 1);
 
+
         /* SEND */
+
+        //Send Button
         sendBtn = new Button("Enviar");
         sendBtn.setAlignment(Pos.CENTER);
+
+        //We add the Class "sendButton" from Sports.css
+        sendBtn.getStyleClass().add("sendButton");
         mainGrid.add(sendBtn, 0, 7, 1, 1);
 
-        sendLbl = new Label("");
+        //Send Label (Result)
+        sendLbl = new Label();
+        //We add the Class "container" from Sports.css
+        sendLbl.getStyleClass().add("container");
+        sendLbl.setVisible(false);
         mainGrid.add(sendLbl, 0, 8, 1, 1);
 
         //Finallly, we add the GridPane to this Tab
@@ -297,12 +315,16 @@ public class Sports extends Survey
         {
             isValid = false;
             errorMessage.append("Profesión, ");
+            professionTxt.setStyle("-fx-background-color: #e74c4c;");
         }
+        else
+            professionTxt.setStyle("");
 
         if (ageTxt.getText().isEmpty())
         {
             isValid = false;
             errorMessage.append("Edad, ");
+            ageTxt.setStyle("-fx-background-color: #e74c4c;");
         }
         else
         {
@@ -314,12 +336,16 @@ public class Sports extends Survey
                 {
                     isValid = false;
                     errorMessage.append("Edad no válida, ");
+                    ageTxt.setStyle("-fx-background-color: #e74c4c;");
                 }
                 else if(age < 18)
                 {
                     isValid = false;
                     errorMessage.append("Esta encuesta no está permitida para menores de edad.");
+                    ageTxt.setStyle("-fx-background-color: #e74c4c;");
                 }
+                else
+                    ageTxt.setStyle("");
             }
             catch (NumberFormatException e)
             {
@@ -352,7 +378,7 @@ public class Sports extends Survey
         // Delete the last comma and space of the error message
         if (!isValid)
         {
-            errorMessage.setLength(errorMessage.length() - 2);
+            errorMessage.setLength(errorMessage.length() - 1);
             sendLbl.setText(errorMessage.toString());
         }
 
@@ -494,6 +520,7 @@ public class Sports extends Survey
 
         /* EVENT TO VALIDATE THE SURVEY */
         sendBtn.setOnAction(actionEvent -> {
+            sendLbl.setVisible(true);
             if(validateSurvey())
             {
                 sendLbl.setText("Encuesta enviada con éxito");
