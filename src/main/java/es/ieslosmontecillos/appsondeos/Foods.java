@@ -11,7 +11,6 @@ import javafx.collections.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.skin.SeparatorSkin;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import java.util.Objects;
@@ -279,7 +278,7 @@ public class Foods extends Survey {
             sendLbl.setVisible(true);
             errorMessage.setLength(errorMessage.length() - 1);
             sendLbl.setText(errorMessage.toString());
-            System.out.println(errorMessage.toString());
+            System.out.println(errorMessage);
         }
         return true;
     }

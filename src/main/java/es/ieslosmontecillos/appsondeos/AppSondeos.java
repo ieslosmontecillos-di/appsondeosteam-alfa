@@ -5,14 +5,9 @@
  */
 package es.ieslosmontecillos.appsondeos;
 import javafx.application.Application;
-
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.GridPane;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -35,7 +30,6 @@ public class AppSondeos extends Application {
         //root.getChildren().add(btnStart);
         
         Scene scene = new Scene(root, 600, 400);
-        //FileInputStream input = new FileInputStream("imagen1.jpg");
         FileInputStream input = new FileInputStream("src\\main\\resources\\es.ieslosmontecillos.appsondeos\\MainMenu.jpg");
 
         Image img = new Image(input);
@@ -80,7 +74,7 @@ public class AppSondeos extends Application {
 
         primaryStage.show();
 
-        /** Segunda Escena*/
+        /* Segunda Escena*/
         StackPane root2 = new StackPane();
         Scene scene2 = new Scene(root2, 600, 400);
 
@@ -105,33 +99,13 @@ public class AppSondeos extends Application {
 
         root2.getChildren().add(tabPane);
 
-        btnStart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                primaryStage.setScene(scene2);
-            }
-        });
+        btnStart.setOnAction(event -> primaryStage.setScene(scene2));
 
-        btnExit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                primaryStage.close();
-            }
-        });
+        btnExit.setOnAction(actionEvent -> primaryStage.close());
 
-        menu1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                primaryStage.setScene(scene2);
-            }
-        });
+        menu1.setOnAction(actionEvent -> primaryStage.setScene(scene2));
 
-        menu2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                primaryStage.close();
-            }
-        });
+        menu2.setOnAction(actionEvent -> primaryStage.close());
 
     }
 

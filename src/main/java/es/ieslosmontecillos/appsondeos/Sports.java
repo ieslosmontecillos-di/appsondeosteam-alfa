@@ -1,58 +1,31 @@
 package es.ieslosmontecillos.appsondeos;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+
+import java.util.Objects;
 
 public class Sports extends Survey
 {
-    //Elements for Sports Tab
-    private GridPane mainGrid;
-    private GridPane gridInfo;
-    private Label titleLbl1;
-    private Label ageLbl;
     private TextField ageTxt;
-    private Label professionLbl;
     private TextField professionTxt;
-    private HBox hbGender;
-    private Label genderLbl;
     private ToggleGroup genderToggle;
-    private RadioButton maleRadio;
-    private RadioButton femaleRadio;
-    private RadioButton noRadio;
-    private Separator sep1;
-    private HBox hb1;
     private CheckBox chb1;
-    private ComboBox sportsChoices;
-    private Separator sep2;
-    private GridPane gridFrec;
-    private Label titleLbl2;
-    private Label frecTitle;
-    private Label frecLbl1;
+    private ComboBox<String> sportsChoices;
     private Slider frecSlider1;
     private Label frecValue1;
-    private Label frecLbl2;
     private Slider frecSlider2;
     private Label frecValue2;
-    private Label frecLbl3;
     private Slider frecSlider3;
     private Label frecValue3;
-    private Separator sep3;
-    private GridPane gridIMC;
-    private Label imcTitle;
-    private Label imcLbl1;
     private Button imcBtn;
     private GridPane hiddenGridIMC;
-    private Label imcLblWg;
     private TextField imcTxtWg;
-    private Label imcLblHg;
     private TextField imcTxtHg;
     private Button imcBtnCalc;
     private Label imcResult;
@@ -72,25 +45,26 @@ public class Sports extends Survey
         setText("Deportes");
 
         //GridPane
-        mainGrid = new GridPane();
+        //Elements for Sports Tab
+        GridPane mainGrid = new GridPane();
         mainGrid.setAlignment(Pos.CENTER);
         mainGrid.setHgap(10);
         mainGrid.setVgap(10);
         mainGrid.setPadding(new Insets(100, 100, 100, 100));
 
         //We add the CSS Class
-        mainGrid.getStylesheets().add(Sports.class.getResource("css/Sports.css").toExternalForm());
+        mainGrid.getStylesheets().add(Objects.requireNonNull(Sports.class.getResource("css/Sports.css")).toExternalForm());
         mainGrid.setId("main");
 
         /* PERSONAL INFO */
 
-        gridInfo = new GridPane();
+        GridPane gridInfo = new GridPane();
         gridInfo.setVgap(5);
         //We add the Class "container" from Sports.css
         gridInfo.getStyleClass().add("container");
 
         //Title
-        titleLbl1 = new Label("Información personal");
+        Label titleLbl1 = new Label("Información personal");
         titleLbl1.setFont(new Font(24));
 
         gridInfo.add(titleLbl1, 0, 0, 1, 1);
@@ -98,35 +72,35 @@ public class Sports extends Survey
         //Elements
 
         //Profession
-        professionLbl = new Label("Profesión:");
+        Label professionLbl = new Label("Profesión:");
         gridInfo.add(professionLbl, 0, 1, 1, 1);
         professionTxt = new TextField("");
         gridInfo.add(professionTxt, 1, 1, 1, 1);
 
         //Age
-        ageLbl = new Label("Edad:");
+        Label ageLbl = new Label("Edad:");
         gridInfo.add(ageLbl, 0, 2, 1, 1);
         ageTxt = new TextField("");
         ageTxt.setPrefWidth(10);
         gridInfo.add(ageTxt, 1, 2, 1, 1);
 
         //Gender
-        genderLbl = new Label("Seleccione su género: ");
+        Label genderLbl = new Label("Seleccione su género: ");
         gridInfo.add(genderLbl, 0, 3, 1, 1);
 
-        hbGender = new HBox();
+        HBox hbGender = new HBox();
 
         genderToggle = new ToggleGroup();
 
-        maleRadio = new RadioButton("Masculino");
+        RadioButton maleRadio = new RadioButton("Masculino");
         maleRadio.setToggleGroup(genderToggle);
         hbGender.getChildren().add(maleRadio);
 
-        femaleRadio = new RadioButton("Femenino");
+        RadioButton femaleRadio = new RadioButton("Femenino");
         femaleRadio.setToggleGroup(genderToggle);
         hbGender.getChildren().add(femaleRadio);
 
-        noRadio = new RadioButton("Sin especificar");
+        RadioButton noRadio = new RadioButton("Sin especificar");
         noRadio.setToggleGroup(genderToggle);
         hbGender.getChildren().add(noRadio);
 
@@ -135,13 +109,13 @@ public class Sports extends Survey
         mainGrid.add(gridInfo, 0, 0, 1, 1);
 
         //Separator 1
-        sep1 = new Separator(Orientation.HORIZONTAL);
+        Separator sep1 = new Separator(Orientation.HORIZONTAL);
         mainGrid.add(sep1, 0, 1, 1, 1);
 
 
         /* CONTAINER 2 */
 
-        hb1 = new HBox(10);
+        HBox hb1 = new HBox(10);
         //We add the Class "container" from Sports.css
         hb1.getStyleClass().add("container");
 
@@ -152,7 +126,7 @@ public class Sports extends Survey
         chb1.setFont(new Font(17));
 
         //ComboBox
-        sportsChoices = new ComboBox();
+        sportsChoices = new ComboBox<>();
 
         //ComboBox's choices
         sportsChoices.getItems().addAll("Fútbol", "Baloncesto", "Tenis", "Golf", "Voleibol", "Natación");
@@ -166,30 +140,30 @@ public class Sports extends Survey
         mainGrid.add(hb1, 0, 2, 1, 1);
 
         //Separator 2
-        sep2 = new Separator(Orientation.HORIZONTAL);
+        Separator sep2 = new Separator(Orientation.HORIZONTAL);
         mainGrid.add(sep2, 0, 3, 1, 1);
 
 
         /* FRECUENCY */
 
         //Container
-        gridFrec = new GridPane();
+        GridPane gridFrec = new GridPane();
         gridFrec.setVgap(5);
         //We add the Class "container" from Sports.css
         gridFrec.getStyleClass().add("container");
 
         //Elements
-        titleLbl2 = new Label("Aficiones");
+        Label titleLbl2 = new Label("Aficiones");
         titleLbl2.setFont(new Font(24));
         gridFrec.add(titleLbl2, 0, 0, 1, 1);
 
-        frecTitle = new Label("Marque su grado de frecuencia a: ");
+        Label frecTitle = new Label("Marque su grado de frecuencia a: ");
         gridFrec.add(frecTitle, 0, 1, 1, 1);
 
         //Labels and Sliders for Frecuency
 
         //Frecuency 1
-        frecLbl1 = new Label("Salir de fiesta");
+        Label frecLbl1 = new Label("Salir de fiesta");
         gridFrec.add(frecLbl1, 0, 2, 1, 1);
 
         frecSlider1 = new Slider(0, 10, 0);
@@ -204,7 +178,7 @@ public class Sports extends Survey
 
 
         //Frecuency 2
-        frecLbl2 = new Label("Comer saludable");
+        Label frecLbl2 = new Label("Comer saludable");
         gridFrec.add(frecLbl2, 0, 3, 1, 1);
 
         frecSlider2 = new Slider(0, 10, 0);
@@ -218,7 +192,7 @@ public class Sports extends Survey
         gridFrec.add(frecValue2, 2, 3, 1, 1);
 
         //Frecuency 3
-        frecLbl3 = new Label("Realizar ejercicio");
+        Label frecLbl3 = new Label("Realizar ejercicio");
         gridFrec.add(frecLbl3, 0, 4, 1, 1);
 
         frecSlider3 = new Slider(0, 10, 0);
@@ -235,22 +209,22 @@ public class Sports extends Survey
         mainGrid.add(gridFrec, 0, 4, 1, 1);
 
         //Separator 3
-        sep3 = new Separator(Orientation.HORIZONTAL);
+        Separator sep3 = new Separator(Orientation.HORIZONTAL);
         mainGrid.add(sep3, 0, 5, 1, 1);
 
 
         /* IMC */
 
-        gridIMC = new GridPane();
+        GridPane gridIMC = new GridPane();
         gridIMC.setVgap(5);
         //We add the Class "container" from Sports.css
         gridIMC.getStyleClass().add("container");
 
-        imcTitle = new Label("IMC (Índice de Masa Corporal)");
+        Label imcTitle = new Label("IMC (Índice de Masa Corporal)");
         imcTitle.setFont(new Font(24));
         gridIMC.add(imcTitle, 0, 0, 1, 1);
 
-        imcLbl1 = new Label("¿Deseas conocer tu IMC?");
+        Label imcLbl1 = new Label("¿Deseas conocer tu IMC?");
         gridIMC.add(imcLbl1, 0, 1, 1, 1);
 
         imcBtn = new Button("Conocer su IMC");
@@ -261,12 +235,12 @@ public class Sports extends Survey
         hiddenGridIMC.setVgap(5);
         hiddenGridIMC.setVisible(false);
 
-        imcLblWg = new Label("Introduzca su peso(kg):");
+        Label imcLblWg = new Label("Introduzca su peso(kg):");
         hiddenGridIMC.add(imcLblWg, 0, 0, 1, 1);
         imcTxtWg = new TextField();
         hiddenGridIMC.add(imcTxtWg, 0, 1, 1, 1);
 
-        imcLblHg = new Label("Introduzca su estatura(cm):");
+        Label imcLblHg = new Label("Introduzca su estatura(cm):");
         hiddenGridIMC.add(imcLblHg, 0, 2, 1, 1);
         imcTxtHg = new TextField();
         hiddenGridIMC.add(imcTxtHg, 0, 3, 1, 1);
@@ -407,7 +381,7 @@ public class Sports extends Survey
 
         // Sport
         if (chb1.isSelected() && sportsChoices.getSelectionModel().getSelectedItem() != null)
-            data.append(sportsChoices.getSelectionModel().getSelectedItem().toString()).append(",");
+            data.append(sportsChoices.getSelectionModel().getSelectedItem()).append(",");
         else
             data.append("No especificado,");
 
@@ -447,56 +421,31 @@ public class Sports extends Survey
         sportsChoices.setVisible(false);
 
         //Listener that hide and show the ComboBox
-        chb1.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent actionEvent)
-            {
-                if (chb1.isSelected())
-                    sportsChoices.setVisible(true);
-                else if(!chb1.isSelected())
-                    sportsChoices.setVisible(false);
-            }
+        chb1.setOnAction(actionEvent -> {
+            if (chb1.isSelected())
+                sportsChoices.setVisible(true);
+            else if(!chb1.isSelected())
+                sportsChoices.setVisible(false);
         });
 
 
         /* EVENT FOR THE SLIDE OBJECT */
 
-        frecSlider1.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue)
-            {
-                    frecValue1.textProperty().setValue(
-                            String.valueOf(newValue.intValue())
-                    );
-            }
-        });
+        frecSlider1.valueProperty().addListener((observableValue, oldValue, newValue) -> frecValue1.textProperty().setValue(
+                String.valueOf(newValue.intValue())
+        ));
 
-        frecSlider2.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue)
-            {
-                frecValue2.textProperty().setValue(
-                        String.valueOf(newValue.intValue())
-                );
-            }
-        });
+        frecSlider2.valueProperty().addListener((observableValue, oldValue, newValue) -> frecValue2.textProperty().setValue(
+                String.valueOf(newValue.intValue())
+        ));
 
-        frecSlider3.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue)
-            {
-                frecValue3.textProperty().setValue(
-                        String.valueOf(newValue.intValue())
-                );
-            }
-        });
+        frecSlider3.valueProperty().addListener((observableValue, oldValue, newValue) -> frecValue3.textProperty().setValue(
+                String.valueOf(newValue.intValue())
+        ));
 
         /* EVENT TO SHOW "HiddenGridIMC" */
 
-        imcBtn.setOnAction(actionEvent -> {
-            hiddenGridIMC.setVisible(true);
-        });
+        imcBtn.setOnAction(actionEvent -> hiddenGridIMC.setVisible(true));
 
         /* EVENT TO CALCULATE ICM */
 
