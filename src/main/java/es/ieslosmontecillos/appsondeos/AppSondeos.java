@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,19 +30,13 @@ public class AppSondeos extends Application {
         BorderPane root = new BorderPane();
         //root.getChildren().add(btnStart);
         
-        Scene scene = new Scene(root, 600, 400);
-        FileInputStream input = new FileInputStream("src\\main\\resources\\es.ieslosmontecillos.appsondeos\\MainMenu.jpg");
 
-        Image img = new Image(input);
-        //Image img = new Image(getClass().getResource("../MainMenu.jpg").toExternalForm());
+        Scene scene = new Scene(root, 700, 500);
 
-        BackgroundImage bgImage = new BackgroundImage(img,
-                                                        BackgroundRepeat.NO_REPEAT,
-                                                        BackgroundRepeat.NO_REPEAT,
-                                                        BackgroundPosition.DEFAULT,
-                                                        new BackgroundSize(600, 400, false, false, false, false));
-        Background bGround = new Background(bgImage);
-        root.setBackground(bGround);
+
+        /* Set the background image */
+        root.getStylesheets().add(Sports.class.getResource("css/Main.css").toExternalForm());
+        root.setId("main");
 
         primaryStage.setTitle("Quest");
         primaryStage.setScene(scene);
@@ -57,12 +52,14 @@ public class AppSondeos extends Application {
         BorderPane.setAlignment(menuBar, Pos.TOP_CENTER);
 
         /* Botones */
-        Button btnStart = new Button("Start quest");
-        Button btnExit = new Button("Exit");
+        Button btnStart = new Button("Empezar cuestionario");
+        btnStart.getStyleClass().add("buttons");
+        Button btnExit = new Button("Salir");
+        btnExit.getStyleClass().add("buttons");
 
         /* Añadimos los botones */
-        HBox botonera = new HBox(10, btnStart, btnExit);
-
+        VBox botonera = new VBox(10, btnStart, btnExit);
+        botonera.setStyle("-fx-padding: 15px");
 
         /* Añadimos la botonera */
         root.setBottom(botonera);
@@ -83,7 +80,7 @@ public class AppSondeos extends Application {
         Tab sports = new Sports();
         sports.closableProperty().setValue(false);
         tabPane.getTabs().add(sports);
-        Tab animals = new Tab("Animales");
+        Tab animals = new Animals();
         animals.closableProperty().setValue(false);
         tabPane.getTabs().add(animals);
         Tab meats = new Foods();
@@ -98,6 +95,7 @@ public class AppSondeos extends Application {
 
 
         root2.getChildren().add(tabPane);
+
 
         btnStart.setOnAction(event -> primaryStage.setScene(scene2));
 
