@@ -291,7 +291,7 @@ public class Sports extends Survey
     boolean validateSurvey()
     {
         boolean isValid = true;
-        StringBuilder errorMessage = new StringBuilder("Por favor, complete los siguientes campos: ");
+        StringBuilder errorMessage = new StringBuilder("Error en la encuesta: ");
 
         if (professionTxt.getText().isEmpty())
         {
@@ -303,6 +303,29 @@ public class Sports extends Survey
         {
             isValid = false;
             errorMessage.append("Edad, ");
+        }
+        else
+        {
+            // Verify if "age" contains correct number values
+            try
+            {
+                int age = Integer.parseInt(ageTxt.getText());
+                if (age <= 0)
+                {
+                    isValid = false;
+                    errorMessage.append("Edad no válida, ");
+                }
+                else if(age < 18)
+                {
+                    isValid = false;
+                    errorMessage.append("Esta encuesta no está permitida para menores de edad.");
+                }
+            }
+            catch (NumberFormatException e)
+            {
+                isValid = false;
+                errorMessage.append("Edad no válida, ");
+            }
         }
 
         if (genderToggle.getSelectedToggle() == null)
@@ -339,30 +362,53 @@ public class Sports extends Survey
     @Override
     String getData()
     {
-        //String that will contain the entire string data
         StringBuilder data = new StringBuilder();
-        data.append("Profesión;Edad;Género;Deporte;FrecuenciaSalir;FrecuenciaComer;FrecuenciaEjercicio;PesoIMC;EstaturaIMC;IMC\n");
 
-        data.append(professionTxt.getText()).append(";");
-        data.append(ageTxt.getText()).append(";");
-        RadioButton selectedGender = (RadioButton) genderToggle.getSelectedToggle();
-        data.append(selectedGender.getText()).append(";");
+        // Profession
+        data.append(professionTxt.getText()).append(",");
 
-        if (chb1.isSelected())
-            data.append(sportsChoices.getValue()).append(";");
+        // Age
+        data.append(ageTxt.getText()).append(",");
+
+        // Gender
+        Toggle selectedGender = genderToggle.getSelectedToggle();
+        if (selectedGender != null)
+        {
+            RadioButton selectedRadio = (RadioButton) selectedGender;
+            data.append(selectedRadio.getText()).append(",");
+        } else
+            data.append("Sin especificar,");
+
+        // Sport
+        if (chb1.isSelected() && sportsChoices.getSelectionModel().getSelectedItem() != null)
+            data.append(sportsChoices.getSelectionModel().getSelectedItem().toString()).append(",");
         else
-            data.append("No especificado;");
+            data.append("No especificado,");
 
-        data.append(frecValue1.getText()).append(";");
-        data.append(frecValue2.getText()).append(";");
-        data.append(frecValue3.getText()).append(";");
+        // Frecuency
+        data.append(frecSlider1.getValue()).append(",");
+        data.append(frecSlider2.getValue()).append(",");
+        data.append(frecSlider3.getValue()).append(",");
 
+        // IMC
         if (hiddenGridIMC.isVisible())
         {
-            data.append(imcTxtWg.getText()).append(";");
-            data.append(imcTxtHg.getText()).append(";");
-            data.append(imcResult.getText());
+            String weight = imcTxtWg.getText();
+            String height = imcTxtHg.getText();
+            try
+            {
+                double weightValue = Double.parseDouble(weight);
+                double heightValue = Double.parseDouble(height) / 100;
+                double imc = weightValue / (heightValue * heightValue);
+                data.append(String.format("%.2f", imc));
+            }
+            catch (NumberFormatException e)
+            {
+                data.append("No especificado");
+            }
         }
+        else
+            data.append("No especificado");
 
         return data.toString();
     }

@@ -18,8 +18,25 @@ public class Journeys extends Survey
 {
     //Elements for Journeys Tab
     private GridPane mainGrid;
-    private GridPane gridPref;
+    private GridPane gridInfo;
     private Label titleLbl1;
+    private Label cityLbl;
+    private TextField cityTxt;
+    private Label countryLbl;
+    private TextField countryTxt;
+    private ToggleGroup nativeToggle;
+    private Label nativeLbl;
+    private HBox nativeResHBox1;
+    private RadioButton yesRadio1;
+    private RadioButton noRadio1;
+    private HBox nativeResHBox2;
+    private Label nativeResLbl;
+    private TextField nativeResTxt;
+    private Label numCountLbl;
+    private TextField numCountTxt;
+    private Separator sep1;
+    private GridPane gridPref;
+    private Label titleLbl2;
     private VBox transportVB;
     private Label transportLbl;
     private ToggleGroup transportToggle;
@@ -30,12 +47,12 @@ public class Journeys extends Survey
     private HBox frecHB;
     private Label frecLbl;
     private ComboBox frecChoices;
-    private Separator sep1;
+    private Separator sep2;
     private GridPane gridDest;
     private Label destLbl1;
     private ToggleGroup travelToggle;
-    private RadioButton yesRadio;
-    private RadioButton noRadio;
+    private RadioButton yesRadio2;
+    private RadioButton noRadio2;
     private GridPane hiddenGridDest;
     private Label destLbl2;
     private ToggleGroup imageToggle;
@@ -80,16 +97,83 @@ public class Journeys extends Survey
         mainGrid.getStylesheets().add(Journeys.class.getResource("css/Journeys.css").toExternalForm());
         mainGrid.setId("main");
 
+
+        /* PERSONAL INFO */
+
+        gridInfo = new GridPane();
+        gridInfo.setVgap(5);
+
+        //Title
+        titleLbl1 = new Label("Información personal");
+        titleLbl1.setFont(new Font(24));
+
+        gridInfo.add(titleLbl1, 0, 0, 1, 1);
+
+        //Elements
+
+        //City
+        cityLbl = new Label("Introduzca su ciudad natal");
+        gridInfo.add(cityLbl, 0, 1, 1, 1);
+        cityTxt = new TextField("");
+        gridInfo.add(cityTxt, 1, 1, 1, 1);
+
+        //Country
+        countryLbl = new Label("Introduzca su país natal");
+        gridInfo.add(countryLbl, 0, 2, 1, 1);
+        countryTxt = new TextField("");
+        gridInfo.add(countryTxt, 1, 2, 1, 1);
+
+        //Native Country
+        nativeToggle = new ToggleGroup();
+
+        nativeLbl = new Label("¿Reside actualmente en su país natal?");
+        gridInfo.add(nativeLbl, 0, 3, 1, 1);
+
+        nativeResHBox1 = new HBox(5);
+
+        yesRadio1 = new RadioButton("Sí");
+        yesRadio1.setToggleGroup(nativeToggle);
+        nativeResHBox1.getChildren().add(yesRadio1);
+
+        noRadio1 = new RadioButton("No");
+        noRadio1.setToggleGroup(nativeToggle);
+        nativeResHBox1.getChildren().add(noRadio1);
+
+        gridInfo.add(nativeResHBox1, 1, 3, 1, 1);
+
+        nativeResHBox2 = new HBox(10);
+        nativeResHBox2.setVisible(false);
+
+        nativeResLbl = new Label("Introduzca su país de residencia actual: ");
+        nativeResHBox2.getChildren().add(nativeResLbl);
+
+        nativeResTxt = new TextField("");
+        nativeResHBox2.getChildren().add(nativeResTxt);
+
+        gridInfo.add(nativeResHBox2, 2, 3, 1, 1);
+
+        //Countries visited
+        numCountLbl = new Label("Introduzca número de países visitados: ");
+        gridInfo.add(numCountLbl, 0, 4, 1, 1);
+        numCountTxt = new TextField("");
+        gridInfo.add(numCountTxt, 1, 4, 1, 1);
+
+        mainGrid.add(gridInfo, 0, 0, 1, 1);
+
+        //Separator 1
+        sep1 = new Separator(Orientation.HORIZONTAL);
+        mainGrid.add(sep1, 0, 1, 1, 1);
+
         /* PREFERENCES */
 
         gridPref = new GridPane();
         gridPref.setVgap(5);
 
         //Title
-        titleLbl1 = new Label("Preferencias");
-        titleLbl1.setFont(new Font(24));
+        titleLbl2 = new Label("Preferencias");
+        titleLbl2.setFont(new Font(24));
 
-        gridPref.add(titleLbl1, 0, 0, 1, 1);
+        gridPref.add(titleLbl2, 0, 0, 1, 1);
 
         //Transport
         transportVB = new VBox(5);
@@ -132,11 +216,11 @@ public class Journeys extends Survey
         gridPref.add(frecHB, 0, 2, 1, 1);
 
         //We add the Grid of Preferences to the Main Grid
-        mainGrid.add(gridPref, 0, 0, 1, 1);
+        mainGrid.add(gridPref, 0, 2, 1, 1);
 
-        //Separator 1
-        sep1 = new Separator(Orientation.HORIZONTAL);
-        mainGrid.add(sep1, 0, 1, 1, 1);
+        //Separator 2
+        sep2 = new Separator(Orientation.HORIZONTAL);
+        mainGrid.add(sep2, 0, 3, 1, 1);
 
 
         /* DESTINATION */
@@ -152,15 +236,15 @@ public class Journeys extends Survey
         //Radio Buttons
         travelToggle = new ToggleGroup();
 
-        yesRadio = new RadioButton("Sí");
-        yesRadio.setToggleGroup(travelToggle);
-        gridDest.add(yesRadio, 1, 0, 1, 1);
+        yesRadio2 = new RadioButton("Sí");
+        yesRadio2.setToggleGroup(travelToggle);
+        gridDest.add(yesRadio2, 1, 0, 1, 1);
 
-        noRadio = new RadioButton("No");
-        noRadio.setToggleGroup(travelToggle);
-        gridDest.add(noRadio, 2, 0, 1, 1);
+        noRadio2 = new RadioButton("No");
+        noRadio2.setToggleGroup(travelToggle);
+        gridDest.add(noRadio2, 2, 0, 1, 1);
 
-        mainGrid.add(gridDest, 0, 2, 1, 1);
+        mainGrid.add(gridDest, 0, 4, 1, 1);
 
         //Destination - Container 2
         hiddenGridDest = new GridPane();
@@ -238,15 +322,15 @@ public class Journeys extends Survey
             System.err.println("Image not found");
         }
 
-        mainGrid.add(hiddenGridDest, 0, 3, 1, 1);
+        mainGrid.add(hiddenGridDest, 0, 5, 1, 1);
 
         /* SEND */
         sendBtn = new Button("Enviar");
         sendBtn.setAlignment(Pos.CENTER);
-        mainGrid.add(sendBtn, 0, 4, 1, 1);
+        mainGrid.add(sendBtn, 0, 6, 1, 1);
 
         sendLbl = new Label("");
-        mainGrid.add(sendLbl, 0, 5, 1, 1);
+        mainGrid.add(sendLbl, 0, 7, 1, 1);
 
         //Finallly, we add the GridPane to this Tab
         setContent(mainGrid);
@@ -257,7 +341,70 @@ public class Journeys extends Survey
     boolean validateSurvey()
     {
         boolean isValid = true;
-        StringBuilder errorMessage = new StringBuilder("Por favor, complete los siguientes campos: ");
+        StringBuilder errorMessage = new StringBuilder("Error en la encuesta: ");
+
+        if(cityTxt.getText().isEmpty())
+        {
+            isValid = false;
+            errorMessage.append("Ciudad natal, ");
+            cityTxt.setStyle("-fx-background-color: #e74c4c;");
+        }
+        else
+            cityTxt.setStyle("");
+
+        if(countryTxt.getText().isEmpty())
+        {
+            isValid = false;
+            errorMessage.append("País natal, ");
+            countryTxt.setStyle("-fx-background-color: #e74c4c;");
+        }
+        else
+            countryTxt.setStyle("");
+
+        Toggle selectedNativeCount = nativeToggle.getSelectedToggle();
+
+        if (selectedNativeCount == null)
+        {
+            isValid = false;
+            errorMessage.append("¿Reside en su país natal?, ");
+        }
+        else if(selectedNativeCount == noRadio1)
+        {
+            if(nativeResTxt.getText().isEmpty())
+            {
+                isValid = false;
+                errorMessage.append("País actual, ");
+                nativeResTxt.setStyle("-fx-background-color: #e74c4c;");
+            }
+            else
+                nativeResTxt.setStyle("");
+        }
+
+        if(numCountTxt.getText().isEmpty())
+        {
+            isValid = false;
+            errorMessage.append("Número de países visitados, ");
+            numCountTxt.setStyle("-fx-background-color: #e74c4c;");
+        }
+        else {
+            try
+            {
+                int numCountriesVisited = Integer.parseInt(numCountTxt.getText());
+                if (numCountriesVisited < 0)
+                {
+                    isValid = false;
+                    errorMessage.append("Número de países visitados no válido, ");
+                    numCountTxt.setStyle("-fx-background-color: #e74c4c;");
+                }
+                else
+                    numCountTxt.setStyle("");
+            }
+            catch (NumberFormatException e)
+            {
+                isValid = false;
+                errorMessage.append("Número de países visitados no válido, ");
+            }
+        }
 
         Toggle selectedTransport = transportToggle.getSelectedToggle();
         if (selectedTransport == null)
@@ -279,7 +426,7 @@ public class Journeys extends Survey
             isValid = false;
             errorMessage.append("¿Le gusta viajar?, ");
         }
-        else if (selectedTravel == yesRadio)
+        else if (selectedTravel == yesRadio2)
         {
             Toggle selectedDestination = imageToggle.getSelectedToggle();
             if (selectedDestination == null)
@@ -300,38 +447,76 @@ public class Journeys extends Survey
     }
 
     @Override
-    String getData() {
+    String getData()
+    {
         StringBuilder data = new StringBuilder();
-        data.append("TransportePreferido;FrecuenciaTransporte;LeGustaViajar;DestinoElegido\n");
 
-        RadioButton selectedTransport = (RadioButton) transportToggle.getSelectedToggle();
-        data.append(selectedTransport.getText()).append(";");
+        // Personal Info
+        data.append(cityTxt.getText()).append(",");
+        data.append(countryTxt.getText()).append(",");
 
-        data.append(frecChoices.getValue()).append(";");
+        Toggle selectedNativeCount = nativeToggle.getSelectedToggle();
 
+        String nativeCountValue = "";
+        if (selectedNativeCount == yesRadio1)
+            nativeCountValue = "Sí";
+        else if (selectedNativeCount == noRadio1)
+            nativeCountValue = "No";
+        data.append(nativeCountValue).append(",");
+
+        if (selectedNativeCount == noRadio1)
+            data.append(nativeResTxt.getText()).append(",");
+        else
+            data.append(",");
+
+        data.append(numCountTxt.getText()).append(",");
+
+        // Preferences
+        Toggle selectedTransport = transportToggle.getSelectedToggle();
+        data.append(((RadioButton) selectedTransport).getText()).append(",");
+
+        data.append(frecChoices.getValue()).append(",");
+
+        // Destination
         Toggle selectedTravel = travelToggle.getSelectedToggle();
-        data.append(selectedTravel == yesRadio ? "Sí;" : "No;");
 
-        if (selectedTravel == yesRadio) {
+        String travelValue = "";
+        if (selectedTravel == yesRadio2)
+            travelValue = "Sí";
+        else
+            travelValue = "No";
+
+        data.append(travelValue).append(",");
+
+        if (selectedTravel == yesRadio2)
+        {
             Toggle selectedDestination = imageToggle.getSelectedToggle();
-            ToggleButton selectedToggleButton = (ToggleButton) selectedDestination;
-            data.append(selectedToggleButton.getText());
-        } else {
-            data.append("No especificado");
+            data.append(((ToggleButton) selectedDestination).getText());
         }
+        else
+            data.append("N/A");
 
         return data.toString();
     }
 
     public void addEvents()
     {
+        /* EVENT TO SHOW THE FIELD "Native Country" */
+
+        nativeToggle.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == yesRadio1)
+                nativeResHBox2.setVisible(false); // Hide the HBox
+            else if (newValue == noRadio1)
+                nativeResHBox2.setVisible(true); // Show the HBox
+        });
+
         /* EVENT TO SHOW OR HIDE THE "hiddenGridDest" */
 
         travelToggle.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == yesRadio)
-                hiddenGridDest.setVisible(true); // Mostrar cuando se selecciona "Sí"
+            if (newValue == yesRadio2)
+                hiddenGridDest.setVisible(true); // Show the Grid
             else
-                hiddenGridDest.setVisible(false); // Ocultar en cualquier otro caso
+                hiddenGridDest.setVisible(false); // Hide the Grid
         });
 
         /* EVENT TO VALIDATE THE SURVEY */
