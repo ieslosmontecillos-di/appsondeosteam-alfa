@@ -1,0 +1,44 @@
+*
+{
+    -fx-text-fill: black;
+
+}
+
+/* Main Container from Sports */
+#main
+{
+    -fx-background-image: url("../img/bgSports.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+/* Other containers */
+.container
+{
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+}
+
+/* Every TextField from Sports */
+.text-field
+{
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+/* Send Button */
+.sendButton
+{
+    -fx-background-color: rgba(69,141,216,255);
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-alignment: center;
+}

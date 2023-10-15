@@ -36,19 +36,10 @@ public class AppSondeos extends Application {
         //root.getChildren().add(btnStart);
         
         Scene scene = new Scene(root, 600, 400);
-        //FileInputStream input = new FileInputStream("imagen1.jpg");
-        FileInputStream input = new FileInputStream("src\\main\\resources\\es.ieslosmontecillos.appsondeos\\MainMenu.jpg");
 
-        Image img = new Image(input);
-        //Image img = new Image(getClass().getResource("../MainMenu.jpg").toExternalForm());
-
-        BackgroundImage bgImage = new BackgroundImage(img,
-                                                        BackgroundRepeat.NO_REPEAT,
-                                                        BackgroundRepeat.NO_REPEAT,
-                                                        BackgroundPosition.DEFAULT,
-                                                        new BackgroundSize(610, 400, false, false, false, false));
-        Background bGround = new Background(bgImage);
-        root.setBackground(bGround);
+        /* Set the background image */
+        root.getStylesheets().add(Sports.class.getResource("css/Main.css").toExternalForm());
+        root.setId("main");
 
         primaryStage.setTitle("Quest");
         primaryStage.setScene(scene);
