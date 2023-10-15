@@ -24,8 +24,8 @@ public abstract class Survey extends Tab {
 
             // We first write the local date and time
             LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            String time = now.format(formatter);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); //Create a format for date and time
+            String time = now.format(format); // Apply the format to the actual date and time
 
             escritor.write(time + "\n");
 
