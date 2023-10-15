@@ -35,7 +35,7 @@ public class AppSondeos extends Application {
         BorderPane root = new BorderPane();
         //root.getChildren().add(btnStart);
         
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 700, 500);
 
         /* Set the background image */
         root.getStylesheets().add(Sports.class.getResource("css/Main.css").toExternalForm());
@@ -55,12 +55,14 @@ public class AppSondeos extends Application {
         BorderPane.setAlignment(menuBar, Pos.TOP_CENTER);
 
         /* Botones */
-        Button btnStart = new Button("Start quest");
-        Button btnExit = new Button("Exit");
+        Button btnStart = new Button("Empezar cuestionario");
+        btnStart.getStyleClass().add("buttons");
+        Button btnExit = new Button("Salir");
+        btnExit.getStyleClass().add("buttons");
 
         /* Añadimos los botones */
-        HBox botonera = new HBox(10, btnStart, btnExit);
-
+        VBox botonera = new VBox(10, btnStart, btnExit);
+        botonera.setStyle("-fx-padding: 15px");
 
         /* Añadimos la botonera */
         root.setBottom(botonera);
@@ -101,6 +103,7 @@ public class AppSondeos extends Application {
             @Override
             public void handle(ActionEvent event) {
                 primaryStage.setScene(scene2);
+                primaryStage.setFullScreen(true);
             }
         });
 
@@ -115,6 +118,7 @@ public class AppSondeos extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(scene2);
+                primaryStage.setFullScreen(true);
             }
         });
 

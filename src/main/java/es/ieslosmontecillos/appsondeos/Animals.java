@@ -249,14 +249,15 @@ public class Animals extends Survey{
 
         /*  Send and clean button */
         btnSend = new Button("Enviar");
-        btnSend.getStyleClass().add("sendButton");
+        btnSend.getStyleClass().add("buttons");
         btnClean = new Button("Limpiar");
-        btnClean.getStyleClass().add("sendButton");
-        lblInfo = new Label();
+        btnClean.getStyleClass().add("buttons");
+        lblInfo = new Label("Contesta el cuestionario");
+        lblInfo.getStyleClass().add("lblValidation");
         buttonPanel = new HBox(10);
         buttonPanel.getChildren().addAll(btnClean, btnSend);
 
-        HBox hboxFinal = new HBox(50);
+        HBox hboxFinal = new HBox(10);
         hboxFinal.getChildren().addAll(buttonPanel, lblInfo);
 
         grid.add(hboxFinal, 0, 10);
@@ -325,11 +326,13 @@ public class Animals extends Survey{
                 if(validateSurvey())
                 {
                     lblInfo.setText("--|Encuesta enviada con éxito|--");
+                    lblInfo.setStyle("-fx-text-fill: green");
                     createSCVFile(getData(), "Animales");
                 }
                 else
                 {
                     lblInfo.setText("Error: Elige al menos una opción por pregunta");
+                    lblInfo.setStyle("-fx-text-fill: red");
                 }
             }
         });
@@ -349,7 +352,8 @@ public class Animals extends Survey{
                 combo1.setValue(null);
                 combo1.setVisible(false);
                 lbl7.setVisible(false);
-                lblInfo.setText("");
+                lblInfo.setText("Contesta el cuestionario");
+                lblInfo.setStyle("-fx-text-fill: black");
             }
         });
 
