@@ -19,7 +19,7 @@ public abstract class Survey extends Tab {
     void createSCVFile(String datos,String surveyName){
 
         try {
-            File EncCSV = new File("Enc_"+surveyName+".csv");
+            File EncCSV = new File("src/main/surveyResults/Enc_"+surveyName+".csv");
             FileWriter escritor = new FileWriter(EncCSV);
 
             // We first write the local date and time
