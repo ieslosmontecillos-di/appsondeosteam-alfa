@@ -349,8 +349,8 @@ public class Animals extends Survey{
                 rd4.getText() + ";" + resultComboBox;
     }
 
-    @Override
+
     void createSCVFile(String datos, String surveyName) {
-        super.createSCVFile(datos, surveyName);
+        super.createCSVFile(datos, surveyName);
     }
 }
