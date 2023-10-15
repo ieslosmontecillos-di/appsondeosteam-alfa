@@ -16,22 +16,25 @@ public abstract class Survey extends Tab {
     abstract String getData();
 
 
-    void createSCVFile(String datos,String surveyName){
+    void createCSVFile(String data, String surveyName){
 
         try {
-            File EncCSV = new File("src/main/surveyResults/Enc_"+surveyName+".csv");
-            FileWriter escritor = new FileWriter(EncCSV);
+            File EncCSV = new File("src/main/surveyResults/Enc_" + surveyName + ".csv");
+            FileWriter writer = new FileWriter(EncCSV, true);
 
-            // We first write the local date and time
+            // Get the current date and hour
             LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); //Create a format for date and time
-            String time = now.format(format); // Apply the format to the actual date and time
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String time = now.format(formatter);
 
-            escritor.write(time + "\n");
+            // Write date and hour before the data
+            writer.write(time + "\n");
 
-            escritor.write(datos);
-            escritor.close();
-            System.out.println("El String se ha guardado en Enc_"+surveyName+".csv");
+            // Write data
+            writer.write(data + "\n\n");
+
+            writer.close();
+            System.out.println("El String se ha guardado en Enc_" + surveyName + ".csv");
         } catch (IOException e) {
             e.printStackTrace();
         }
