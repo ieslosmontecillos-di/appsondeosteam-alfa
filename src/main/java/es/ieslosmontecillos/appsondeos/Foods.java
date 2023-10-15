@@ -8,10 +8,17 @@ package es.ieslosmontecillos.appsondeos;
 
 
 import javafx.collections.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 
 import java.text.NumberFormat;
+import java.util.Objects;
 
 public class Foods extends Survey {
 
@@ -32,12 +39,13 @@ public class Foods extends Survey {
 
     private ToggleGroup toggleGroup;
 
-    private RadioButton radioButton1;
-    private RadioButton radioButton2;
-    private Slider slider1;
-    private Slider slider2;
-    private Slider slider3;
-    private Label lbl16 = new Label();
+    private final RadioButton radioButton1 = new RadioButton("Si");
+    private final RadioButton radioButton2 = new RadioButton("No");
+    private TextField slider1;
+    private TextField slider2;
+    private TextField slider3;
+    private Label lbl12=new Label("");
+    private final Label lbl16 = new Label();
 
     public Foods() {
         setText("Comidas");
@@ -103,11 +111,10 @@ public class Foods extends Survey {
 
         toggleGroup = new ToggleGroup();
 
-        radioButton1 = new RadioButton();
-        radioButton2 = new RadioButton();
-        slider1 = new Slider(0, 10, 5);
-        slider2 = new Slider(0, 10, 5);
-        slider3 = new Slider(0, 10, 5);
+        slider1 = new TextField();
+        slider2 = new TextField();
+        slider3 = new TextField();
+
         // End
 
 
@@ -125,100 +132,129 @@ public class Foods extends Survey {
 
         //first third of the survey
 
-        lbl1.setText("¿Cuál es tu comida favorita?");
 
-        hbox1_1.getChildren().addAll(lbl1, txt1);
+            GridPane mainGrid = new GridPane();
+            mainGrid.setAlignment(Pos.CENTER);
+            mainGrid.setHgap(11);
+            mainGrid.setVgap(10);
+            mainGrid.setPadding(new Insets(100, 100, 100, 100));
 
-        lbl2.setText("¿Cuál es tu sabor favorito?");
-        lbl3.setText("¿cuantas comidas diarias haces?");
-        hbox1_2.getChildren().addAll(lbl2, combo1, lbl3, combo2);
+            try {
+                mainGrid.getStylesheets().add(Objects.requireNonNull(Sports.class.getResource("css/Sports.css")).toExternalForm());
+                mainGrid.setId("main");
+            } catch(NullPointerException e){
+                System.out.println("No se ha podido añadir el css a la aplicación");
 
-        lbl4.setText("¿Consideras que haces buena comida?");
-        lbl5.setText("Sí:");
-        lbl6.setText("No:");
-
-        hbox1_3.getChildren().addAll(lbl4, lbl5, radioButton1, lbl6, radioButton2);
-
-
-        vBox1.getChildren().addAll(hbox1_1, hbox1_2, hbox1_3);
-        //end of the first third of the survey
+            }
 
 
-        //Second third of the survey
-        lbl7.setText("¿Haces algún tipo de dieta especial?");
-        lbl8.setText("¿Cuál?");
 
-        hbox2_1.getChildren().addAll(checkBox1, lbl7);
-        hbox2_2.getChildren().addAll(lbl8, combo3);
-        hbox2_2.setVisible(false);
+            GridPane gridInfo = new GridPane();
+            gridInfo.setVgap(5);
 
 
-        vBox2.getChildren().addAll(hbox2_1, hbox2_2);
-
-        //end of the second third of the survey
-
-        //third third of the survey
-
-        lbl9.setText("Marque del 1 al 10 su experiencia cocinando con:");
-        lbl10.setText("Horno");
-        lbl12.setText("Plancha");
-        lbl14.setText("Olla");
-        //end of the third third of the survey
-
-        hbox3_1.getChildren().add(lbl9);
-
-        hbox3_2.getChildren().addAll(lbl10, slider1, lbl11);
-        hbox3_3.getChildren().addAll(lbl12, slider2, lbl13);
-        hbox3_4.getChildren().addAll(lbl14, slider3, lbl15);
+           lbl1.setText("¿Cual es tu comida favorita?");
+            gridInfo.add(lbl1, 0, 1, 1, 1);
+            txt1 = new TextField("");
+            gridInfo.add(txt1, 1, 1, 1, 1);
 
 
-        lbl11.textProperty().bindBidirectional(slider1.valueProperty(), NumberFormat.getNumberInstance());
-        slider1.setShowTickMarks(true);
-        slider1.setMajorTickUnit(1);
-        slider1.setShowTickLabels(true);
+           lbl2.setText("¿Cual es tu sabor favorito?");
+            gridInfo.add(lbl2, 0, 2, 1, 1);
+
+            gridInfo.add(combo1, 1, 2, 1, 1);
 
 
-        lbl13.textProperty().bindBidirectional(slider2.valueProperty(), NumberFormat.getNumberInstance());
-        slider2.setShowTickMarks(true);
-        slider2.setMajorTickUnit(1);
-        slider2.setShowTickLabels(true);
+            lbl3.setText("¿Cuantas comidas diarias haces?");
+            gridInfo.add(lbl3, 0, 3, 1, 1);
 
-        lbl15.textProperty().bindBidirectional(slider3.valueProperty(), NumberFormat.getNumberInstance());
-        slider3.setShowTickMarks(true);
-        slider3.setMajorTickUnit(1);
-        slider3.setShowTickLabels(true);
 
-        checkBox1.setOnAction(e -> hbox2_2.setVisible(checkBox1.isSelected()));
+            gridInfo.add(combo2, 1, 3, 1, 1);
 
-        vBox3.getChildren().addAll(hbox3_1, hbox3_2, hbox3_3, hbox3_4);
-        root.getChildren().addAll(vBox1, vBox2, vBox3);
+            mainGrid.add(gridInfo, 0, 0, 1, 1);
 
-        root.getStylesheets().add(Foods.class.getResource("css/Foods.css").toExternalForm());
-        root.setId("main");
-        vBox1.setId("vBox1");
-        vBox2.setId("vBox2");
-        vBox3.setId("vBox3");
+            HBox hb1;
+            hb1 = new HBox(10);
 
-        root.getChildren().add(sendButton);
 
-        root.getChildren().add(lbl16);
-        setContent(root);
 
-        sendButton.setOnAction(actionEvent -> validateSurvey());
+
+            lbl4.setText("¿Consideras que haces buena comida?");
+            hb1.getChildren().addAll(lbl4,radioButton1,radioButton2);
+
+            mainGrid.add(hb1, 0, 2, 1, 1);
+
+
+        HBox hb2;
+        hb2 = new HBox(10);
+        lbl5.setText("¿Haces algún tipo de dieta especial?");
+        mainGrid.add(lbl5, 0, 5, 1, 1);
+        hb2.getChildren().addAll(lbl5,checkBox1);
+        mainGrid.add(hb2, 0, 3, 1, 1);
+
+        HBox hb3;
+        hb3 = new HBox(10);
+        hb3.setVisible(false);
+
+        hb3.getChildren().add(combo3);
+        mainGrid.add(hb3, 0, 4, 1, 1);
+
+
+        checkBox1.setOnAction(actionEvent -> hb3.setVisible(checkBox1.isSelected()));
+            GridPane gridIMC;
+            gridIMC = new GridPane();
+            gridIMC.setVgap(5);
+
+            Label imcTitle = new Label("Habilidades:");
+            imcTitle.setFont(new Font(24));
+            gridIMC.add(imcTitle, 0, 0, 1, 1);
+            lbl6.setText("Marca del 1 al 10 su experiencia cocinando con:");
+            gridIMC.add(lbl6, 0, 1, 1, 1);
+
+
+
+            lbl7.setText("Horno");
+            gridIMC.add(lbl7, 0, 2, 2, 1);
+            gridIMC.add(slider1, 1, 2, 2, 1);
+
+
+            lbl8.setText("plancha");
+
+             gridIMC.add(lbl8, 0, 3, 2, 1);
+             gridIMC.add(slider2, 1, 3, 2, 1);
+
+            lbl9.setText("Olla");
+            gridIMC.add(lbl9, 0, 4, 2, 1);
+            gridIMC.add(slider3,1,4,2,1);
+
+
+
+            mainGrid.add(gridIMC, 0, 6, 1, 1);
+            mainGrid.add(sendButton,2,7,2,2);
+
+            sendButton.setOnAction(actionEvent -> validateSurvey());
+        mainGrid.add(lbl12,0,8,2,2);
+            setContent(mainGrid);
+
     }
 
+
     @Override
-    boolean validateSurvey() {
+    public boolean validateSurvey() {
         int contadorDeErrores = 0;
         String text = txt1.getText();
         if (text.isEmpty()) contadorDeErrores++;
         if (combo1.getValue() == null) contadorDeErrores++;
         if (combo2.getValue() == null) contadorDeErrores++;
         if (toggleGroup.getSelectedToggle() == null) contadorDeErrores++;
-        System.out.println(contadorDeErrores);
+
 
         if (contadorDeErrores == 0) {
             createCSVFile(getData(),"Comidas");
+            lbl12.setText("");
+        }else{
+            lbl12.setText("Existen errores en tus respuestas.");
+            lbl12.setVisible(true);
         }
 
         return true;
@@ -226,7 +262,15 @@ public class Foods extends Survey {
 
     @Override
     String getData() {
-        return txt1.getText() + ";" + combo1.getValue() + ";" + combo2.getValue() + ";" + combo3.getValue() + ";" + toggleGroup.getSelectedToggle() + ";" + Math.floor(slider1.getValue() * 100) / 100 + ";" + Math.floor(slider2.getValue() * 100) / 100 + ";" + Math.floor(slider1.getValue() * 100) / 100 + ";";
+
+        String sino;
+        if(toggleGroup.getSelectedToggle()==radioButton1){
+            sino="si";
+        } else{
+            sino="no";
+        }
+
+        return txt1.getText() + ";" + combo1.getValue() + ";" + combo2.getValue() + ";" + combo3.getValue() + ";" + sino + ";"+slider1.getText()+";" + slider2.getText() + ";" + slider3.getText()+";";
 
     }
 
