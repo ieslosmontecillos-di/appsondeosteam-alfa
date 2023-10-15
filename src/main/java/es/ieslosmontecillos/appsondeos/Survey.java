@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Survey extends Tab {
-    protected String surveyName;
+
 
     abstract void  makeGUI();
     abstract boolean validateSurvey();

@@ -13,65 +13,24 @@ import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Objects;
 
 public class Journeys extends Survey
 {
-    //Elements for Journeys Tab
-    private GridPane mainGrid;
-    private GridPane gridInfo;
-    private Label titleLbl1;
-    private Label cityLbl;
     private TextField cityTxt;
-    private Label countryLbl;
     private TextField countryTxt;
     private ToggleGroup nativeToggle;
-    private Label nativeLbl;
-    private HBox nativeResHBox1;
     private RadioButton yesRadio1;
     private RadioButton noRadio1;
     private HBox nativeResHBox2;
-    private Label nativeResLbl;
     private TextField nativeResTxt;
-    private Label numCountLbl;
     private TextField numCountTxt;
-    private Separator sep1;
-    private GridPane gridPref;
-    private Label titleLbl2;
-    private VBox transportVB;
-    private Label transportLbl;
     private ToggleGroup transportToggle;
-    private RadioButton carRadio;
-    private RadioButton motocycleRadio;
-    private RadioButton planeRadio;
-    private RadioButton boatRadio;
-    private HBox frecHB;
-    private Label frecLbl;
-    private ComboBox frecChoices;
-    private Separator sep2;
-    private GridPane gridDest;
-    private Label destLbl1;
+    private ComboBox<String> frecChoices;
     private ToggleGroup travelToggle;
     private RadioButton yesRadio2;
-    private RadioButton noRadio2;
     private GridPane hiddenGridDest;
-    private Label destLbl2;
     private ToggleGroup imageToggle;
-    private FileInputStream input1;
-    private Image img1;
-    private ImageView imgView1;
-    private ToggleButton imgTg1;
-    private FileInputStream input2;
-    private Image img2;
-    private ImageView imgView2;
-    private ToggleButton imgTg2;
-    private FileInputStream input3;
-    private Image img3;
-    private ImageView imgView3;
-    private ToggleButton imgTg3;
-    private FileInputStream input4;
-    private Image img4;
-    private ImageView imgView4;
-    private ToggleButton imgTg4;
     private Button sendBtn;
     private Label sendLbl;
 
@@ -87,26 +46,27 @@ public class Journeys extends Survey
         setText("Viajes");
 
         //GridPane
-        mainGrid = new GridPane();
+        //Elements for Journeys Tab
+        GridPane mainGrid = new GridPane();
         mainGrid.setAlignment(Pos.CENTER);
         mainGrid.setHgap(10);
         mainGrid.setVgap(10);
         mainGrid.setPadding(new Insets(20, 20, 20, 20));
 
         //We add the CSS Class
-        mainGrid.getStylesheets().add(Journeys.class.getResource("css/Journeys.css").toExternalForm());
+        mainGrid.getStylesheets().add(Objects.requireNonNull(Journeys.class.getResource("css/Journeys.css")).toExternalForm());
         mainGrid.setId("main");
 
 
         /* PERSONAL INFO */
 
-        gridInfo = new GridPane();
+        GridPane gridInfo = new GridPane();
         gridInfo.setVgap(5);
         //We add the Class "container" from Sports.css
         gridInfo.getStyleClass().add("container");
 
         //Title
-        titleLbl1 = new Label("Información personal");
+        Label titleLbl1 = new Label("Información personal");
         titleLbl1.setFont(new Font(24));
 
         gridInfo.add(titleLbl1, 0, 0, 1, 1);
@@ -114,13 +74,13 @@ public class Journeys extends Survey
         //Elements
 
         //City
-        cityLbl = new Label("Introduzca su ciudad natal");
+        Label cityLbl = new Label("Introduzca su ciudad natal");
         gridInfo.add(cityLbl, 0, 1, 1, 1);
         cityTxt = new TextField("");
         gridInfo.add(cityTxt, 1, 1, 1, 1);
 
         //Country
-        countryLbl = new Label("Introduzca su país natal");
+        Label countryLbl = new Label("Introduzca su país natal");
         gridInfo.add(countryLbl, 0, 2, 1, 1);
         countryTxt = new TextField("");
         gridInfo.add(countryTxt, 1, 2, 1, 1);
@@ -128,10 +88,10 @@ public class Journeys extends Survey
         //Native Country
         nativeToggle = new ToggleGroup();
 
-        nativeLbl = new Label("¿Reside actualmente en su país natal?");
+        Label nativeLbl = new Label("¿Reside actualmente en su país natal?");
         gridInfo.add(nativeLbl, 0, 3, 1, 1);
 
-        nativeResHBox1 = new HBox(5);
+        HBox nativeResHBox1 = new HBox(5);
 
         yesRadio1 = new RadioButton("Sí");
         yesRadio1.setToggleGroup(nativeToggle);
@@ -146,7 +106,7 @@ public class Journeys extends Survey
         nativeResHBox2 = new HBox(10);
         nativeResHBox2.setVisible(false);
 
-        nativeResLbl = new Label("Introduzca su país de residencia actual: ");
+        Label nativeResLbl = new Label("Introduzca su país de residencia actual: ");
         nativeResHBox2.getChildren().add(nativeResLbl);
 
         nativeResTxt = new TextField("");
@@ -155,7 +115,7 @@ public class Journeys extends Survey
         gridInfo.add(nativeResHBox2, 2, 3, 1, 1);
 
         //Countries visited
-        numCountLbl = new Label("Introduzca número de países visitados: ");
+        Label numCountLbl = new Label("Introduzca número de países visitados: ");
         gridInfo.add(numCountLbl, 0, 4, 1, 1);
         numCountTxt = new TextField("");
         gridInfo.add(numCountTxt, 1, 4, 1, 1);
@@ -163,55 +123,55 @@ public class Journeys extends Survey
         mainGrid.add(gridInfo, 0, 0, 1, 1);
 
         //Separator 1
-        sep1 = new Separator(Orientation.HORIZONTAL);
+        Separator sep1 = new Separator(Orientation.HORIZONTAL);
         mainGrid.add(sep1, 0, 1, 1, 1);
 
         /* PREFERENCES */
 
-        gridPref = new GridPane();
+        GridPane gridPref = new GridPane();
         gridPref.setVgap(5);
         //We add the Class "container" from Sports.css
         gridPref.getStyleClass().add("container");
 
         //Title
-        titleLbl2 = new Label("Preferencias");
+        Label titleLbl2 = new Label("Preferencias");
         titleLbl2.setFont(new Font(24));
 
         gridPref.add(titleLbl2, 0, 0, 1, 1);
 
         //Transport
-        transportVB = new VBox(5);
+        VBox transportVB = new VBox(5);
 
         transportToggle = new ToggleGroup();
 
-        transportLbl = new Label("Medio de transporte preferido: ");
+        Label transportLbl = new Label("Medio de transporte preferido: ");
         transportVB.getChildren().add(transportLbl);
 
-        carRadio = new RadioButton("Coche");
+        RadioButton carRadio = new RadioButton("Coche");
         carRadio.setToggleGroup(transportToggle);
         transportVB.getChildren().add(carRadio);
 
-        motocycleRadio = new RadioButton("Motocicleta");
+        RadioButton motocycleRadio = new RadioButton("Motocicleta");
         motocycleRadio.setToggleGroup(transportToggle);
         transportVB.getChildren().add(motocycleRadio);
 
-        planeRadio = new RadioButton("Avión");
+        RadioButton planeRadio = new RadioButton("Avión");
         planeRadio.setToggleGroup(transportToggle);
         transportVB.getChildren().add(planeRadio);
 
-        boatRadio = new RadioButton("Barco");
+        RadioButton boatRadio = new RadioButton("Barco");
         boatRadio.setToggleGroup(transportToggle);
         transportVB.getChildren().add(boatRadio);
 
         gridPref.add(transportVB, 0, 1, 1, 1);
 
         //Frecuency
-        frecHB = new HBox(10);
+        HBox frecHB = new HBox(10);
 
-        frecLbl = new Label("¿Con qué frecuencia lo utiliza?");
+        Label frecLbl = new Label("¿Con qué frecuencia lo utiliza?");
         frecHB.getChildren().add(frecLbl);
 
-        frecChoices = new ComboBox();
+        frecChoices = new ComboBox<>();
         frecHB.getChildren().add(frecChoices);
 
         frecChoices.getItems().addAll("1-6 veces al año", "7-14 veces al año", "15-22 veces al año", "Más de 22 veces al año");
@@ -223,20 +183,20 @@ public class Journeys extends Survey
         mainGrid.add(gridPref, 0, 2, 1, 1);
 
         //Separator 2
-        sep2 = new Separator(Orientation.HORIZONTAL);
+        Separator sep2 = new Separator(Orientation.HORIZONTAL);
         mainGrid.add(sep2, 0, 3, 1, 1);
 
 
         /* DESTINATION */
 
         //Destination - Container 1
-        gridDest = new GridPane();
+        GridPane gridDest = new GridPane();
         gridDest.setVgap(5);
         //We add the Class "container" from Sports.css
         gridDest.getStyleClass().add("container");
 
         //Elements
-        destLbl1 = new Label("¿Considera que le gusta viajar?");
+        Label destLbl1 = new Label("¿Considera que le gusta viajar?");
         gridDest.add(destLbl1, 0, 0, 1, 1);
 
         //Radio Buttons
@@ -246,7 +206,7 @@ public class Journeys extends Survey
         yesRadio2.setToggleGroup(travelToggle);
         gridDest.add(yesRadio2, 1, 0, 1, 1);
 
-        noRadio2 = new RadioButton("No");
+        RadioButton noRadio2 = new RadioButton("No");
         noRadio2.setToggleGroup(travelToggle);
         gridDest.add(noRadio2, 2, 0, 1, 1);
 
@@ -261,7 +221,7 @@ public class Journeys extends Survey
 
 
         //Elements
-        destLbl2 = new Label("Si tuvieras que escoger un destino para tu próximo viaje, ¿cuál sería?");
+        Label destLbl2 = new Label("Si tuvieras que escoger un destino para tu próximo viaje, ¿cuál sería?");
         hiddenGridDest.add(destLbl2, 0, 0, 1, 1);
 
         //Images
@@ -270,57 +230,57 @@ public class Journeys extends Survey
             imageToggle = new ToggleGroup();
 
             //Image 1
-            input1 = new FileInputStream("src\\main\\resources\\es\\ieslosmontecillos\\appsondeos\\img\\egypt.jpg");
-            img1 = new Image(input1);
-            imgView1 = new ImageView(img1);
+            FileInputStream input1 = new FileInputStream("src\\main\\resources\\es\\ieslosmontecillos\\appsondeos\\img\\egypt.jpg");
+            Image img1 = new Image(input1);
+            ImageView imgView1 = new ImageView(img1);
             imgView1.setFitWidth(200);
             imgView1.setFitHeight(150);
             hiddenGridDest.add(imgView1, 0, 1, 1, 1);
 
             //ToggleButton 1
-            imgTg1 = new ToggleButton("Egipto");
+            ToggleButton imgTg1 = new ToggleButton("Egipto");
             imgTg1.setToggleGroup(imageToggle);
             imgTg1.setGraphic(imgView1);
             hiddenGridDest.add(imgTg1, 0, 2, 1, 1);
 
             //Image 2
-            input2 = new FileInputStream("src\\main\\resources\\es\\ieslosmontecillos\\appsondeos\\img\\azores.jpg");
-            img2 = new Image(input2);
-            imgView2 = new ImageView(img2);
+            FileInputStream input2 = new FileInputStream("src\\main\\resources\\es\\ieslosmontecillos\\appsondeos\\img\\azores.jpg");
+            Image img2 = new Image(input2);
+            ImageView imgView2 = new ImageView(img2);
             imgView2.setFitWidth(200);
             imgView2.setFitHeight(150);
             hiddenGridDest.add(imgView2, 1, 1, 1, 1);
 
             //ToggleButton 2
-            imgTg2 = new ToggleButton("Islas Azores");
+            ToggleButton imgTg2 = new ToggleButton("Islas Azores");
             imgTg2.setToggleGroup(imageToggle);
             imgTg2.setGraphic(imgView2);
             hiddenGridDest.add(imgTg2, 1, 2, 1, 1);
 
             //Image 3
-            input3 = new FileInputStream("src\\main\\resources\\es\\ieslosmontecillos\\appsondeos\\img\\sydney.jpg");
-            img3 = new Image(input3);
-            imgView3 = new ImageView(img3);
+            FileInputStream input3 = new FileInputStream("src\\main\\resources\\es\\ieslosmontecillos\\appsondeos\\img\\sydney.jpg");
+            Image img3 = new Image(input3);
+            ImageView imgView3 = new ImageView(img3);
             imgView3.setFitWidth(200);
             imgView3.setFitHeight(150);
             hiddenGridDest.add(imgView3, 0, 3, 1, 1);
 
             //ToggleButton 3
-            imgTg3 = new ToggleButton("Sydney");
+            ToggleButton imgTg3 = new ToggleButton("Sydney");
             imgTg3.setToggleGroup(imageToggle);
             imgTg3.setGraphic(imgView3);
             hiddenGridDest.add(imgTg3, 0, 4, 1, 1);
 
             //Image 4
-            input4 = new FileInputStream("src\\main\\resources\\es\\ieslosmontecillos\\appsondeos\\img\\bali.jpg");
-            img4 = new Image(input4);
-            imgView4 = new ImageView(img4);
+            FileInputStream input4 = new FileInputStream("src\\main\\resources\\es\\ieslosmontecillos\\appsondeos\\img\\bali.jpg");
+            Image img4 = new Image(input4);
+            ImageView imgView4 = new ImageView(img4);
             imgView4.setFitWidth(200);
             imgView4.setFitHeight(150);
             hiddenGridDest.add(imgView4, 1, 3, 1, 1);
 
             //ToggleButton 4
-            imgTg4 = new ToggleButton("Bali");
+            ToggleButton imgTg4 = new ToggleButton("Bali");
             imgTg4.setToggleGroup(imageToggle);
             imgTg4.setGraphic(imgView4);
             hiddenGridDest.add(imgTg4, 1, 4, 1, 1);
@@ -498,7 +458,7 @@ public class Journeys extends Survey
         // Destination
         Toggle selectedTravel = travelToggle.getSelectedToggle();
 
-        String travelValue = "";
+        String travelValue;
         if (selectedTravel == yesRadio2)
             travelValue = "Sí";
         else
@@ -531,10 +491,8 @@ public class Journeys extends Survey
         /* EVENT TO SHOW OR HIDE THE "hiddenGridDest" */
 
         travelToggle.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == yesRadio2)
-                hiddenGridDest.setVisible(true); // Show the Grid
-            else
-                hiddenGridDest.setVisible(false); // Hide the Grid
+            // Hide the Grid
+            hiddenGridDest.setVisible(newValue == yesRadio2); // Show the Grid
         });
 
         /* EVENT TO VALIDATE THE SURVEY */
