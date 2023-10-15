@@ -3,10 +3,10 @@
     -fx-text-fill: black;
 }
 
-/* Main Container from Sports */
+/* Main Container from Journeys */
 #main
 {
-    -fx-background-image: url("../img/bgSports.png");
+    -fx-background-image: url("../img/bgReadings.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center center;
@@ -20,7 +20,7 @@
     -fx-padding: 10px;
 }
 
-/* Every TextField from Sports */
+/* Every TextField from Journeys */
 .text-field
 {
     -fx-border-color: black;
@@ -32,7 +32,7 @@
 /* Send Button */
 .sendButton
 {
-    -fx-background-color: rgba(69,141,216,255);
+    -fx-background-color: rgb(31, 151, 2);
     -fx-text-fill: white;
     -fx-font-size: 18px;
     -fx-border-color: black;

@@ -1,17 +1,43 @@
-#main {
-    -fx-background-image:url("./../images/FoodBg.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: 100%;
+*
+{
+    -fx-text-fill: black;
+}
+
+/* Main Container from Journeys */
+#main
+{
+    -fx-background-image: url("../img/bgFoods.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
+/* Other containers */
+.container
+{
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+}
 
-#vBox1{
-    -fx-background-color: rgba(204, 204, 204, 0.80);
+/* Every TextField from Journeys */
+.text-field
+{
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
 }
-#vBox2{
-    -fx-background-color: rgba(204, 204, 204, 0.50);
-}
-#vBox3{
-    -fx-background-color: rgba(204, 204, 204, 0.31);
+
+/* Send Button */
+.sendButton
+{
+    -fx-background-color: rgb(235, 194, 56);
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-alignment: center;
 }
