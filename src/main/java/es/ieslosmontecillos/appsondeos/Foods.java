@@ -8,44 +8,27 @@ package es.ieslosmontecillos.appsondeos;
 
 
 import javafx.collections.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.skin.SeparatorSkin;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-
-import java.text.NumberFormat;
 import java.util.Objects;
 
 public class Foods extends Survey {
-
-    private VBox root;
-
     private TextField txt1;
     private ComboBox<String> combo1;
-
     private ComboBox<String> combo2;
     private ComboBox<String> combo3;
-
     private CheckBox checkBox1;
-
-
-    private ObservableList<String> flavours;
-    private ObservableList<String> dailyMeals;
-    private ObservableList<String> diet;
-
     private ToggleGroup toggleGroup;
-
     private final RadioButton radioButton1 = new RadioButton("Si");
     private final RadioButton radioButton2 = new RadioButton("No");
     private TextField slider1;
     private TextField slider2;
     private TextField slider3;
-    private Label lbl12=new Label("");
-    private final Label lbl16 = new Label();
+    private Label sendLbl;
 
     public Foods() {
         setText("Comidas");
@@ -57,25 +40,15 @@ public class Foods extends Survey {
     public void makeGUI() {
 
         //here we instance every attrib of the class.
-        root = new VBox();
 
         VBox vBox1 = new VBox();
         vBox1.setId("vBox1");
-        HBox hbox1_1 = new HBox();
-        HBox hbox1_2 = new HBox();
-        HBox hbox1_3 = new HBox();
 
         VBox vBox2 = new VBox();
         vBox2.setId("vBox2");
-        HBox hbox2_1 = new HBox();
-        HBox hbox2_2 = new HBox();
 
         VBox vBox3 = new VBox();
         vBox3.setId("vBox3");
-        HBox hbox3_1 = new HBox();
-        HBox hbox3_2 = new HBox();
-        HBox hbox3_3 = new HBox();
-        HBox hbox3_4 = new HBox();
 
         Button sendButton = new Button("Enviar");
 
@@ -88,21 +61,14 @@ public class Foods extends Survey {
         Label lbl7 = new Label();
         Label lbl8 = new Label();
         Label lbl9 = new Label();
-        Label lbl10 = new Label();
-        Label lbl11 = new Label();
-        Label lbl12 = new Label();
-        Label lbl13 = new Label();
-        Label lbl14 = new Label();
-        Label lbl15 = new Label();
-
 
         txt1 = new TextField();
 
         checkBox1 = new CheckBox();
 
-        flavours = FXCollections.observableArrayList();
-        dailyMeals = FXCollections.observableArrayList();
-        diet = FXCollections.observableArrayList();
+        ObservableList<String> flavours = FXCollections.observableArrayList();
+        ObservableList<String> dailyMeals = FXCollections.observableArrayList();
+        ObservableList<String> diet = FXCollections.observableArrayList();
 
         combo1 = new ComboBox<>(flavours);
         combo2 = new ComboBox<>(dailyMeals);
@@ -140,7 +106,7 @@ public class Foods extends Survey {
             mainGrid.setPadding(new Insets(100, 100, 100, 100));
 
             try {
-                mainGrid.getStylesheets().add(Objects.requireNonNull(Sports.class.getResource("css/Sports.css")).toExternalForm());
+                mainGrid.getStylesheets().add(Objects.requireNonNull(Foods.class.getResource("css/Foods.css")).toExternalForm());
                 mainGrid.setId("main");
             } catch(NullPointerException e){
                 System.out.println("No se ha podido añadir el css a la aplicación");
@@ -151,7 +117,7 @@ public class Foods extends Survey {
 
             GridPane gridInfo = new GridPane();
             gridInfo.setVgap(5);
-
+        gridInfo.getStyleClass().add("container");
 
            lbl1.setText("¿Cual es tu comida favorita?");
             gridInfo.add(lbl1, 0, 1, 1, 1);
@@ -173,6 +139,13 @@ public class Foods extends Survey {
 
             mainGrid.add(gridInfo, 0, 0, 1, 1);
 
+            Separator sp1=new Separator();
+
+
+        GridPane gridAux = new GridPane();
+        gridAux.getStyleClass().add("container");
+
+            mainGrid.add(sp1, 0, 2, 1, 1);
             HBox hb1;
             hb1 = new HBox(10);
 
@@ -182,28 +155,36 @@ public class Foods extends Survey {
             lbl4.setText("¿Consideras que haces buena comida?");
             hb1.getChildren().addAll(lbl4,radioButton1,radioButton2);
 
-            mainGrid.add(hb1, 0, 2, 1, 1);
+            gridAux.add(hb1, 0, 1, 1, 1);
 
 
         HBox hb2;
         hb2 = new HBox(10);
         lbl5.setText("¿Haces algún tipo de dieta especial?");
-        mainGrid.add(lbl5, 0, 5, 1, 1);
         hb2.getChildren().addAll(lbl5,checkBox1);
-        mainGrid.add(hb2, 0, 3, 1, 1);
+        gridAux.add(hb2, 0, 2, 1, 1);
+
 
         HBox hb3;
         hb3 = new HBox(10);
+
+        gridAux.add(hb3,0,3,1,2);
         hb3.setVisible(false);
 
         hb3.getChildren().add(combo3);
-        mainGrid.add(hb3, 0, 4, 1, 1);
+        mainGrid.add(gridAux, 0, 5, 1, 1);
 
 
+        Separator sp2=new Separator();
+        mainGrid.add(sp2, 0, 6, 1, 1);
         checkBox1.setOnAction(actionEvent -> hb3.setVisible(checkBox1.isSelected()));
             GridPane gridIMC;
             gridIMC = new GridPane();
             gridIMC.setVgap(5);
+        gridIMC.getStyleClass().add("container");
+
+        Separator sp3=new Separator();
+        mainGrid.add(sp3, 0, 9, 1, 1);
 
             Label imcTitle = new Label("Habilidades:");
             imcTitle.setFont(new Font(24));
@@ -229,34 +210,77 @@ public class Foods extends Survey {
 
 
 
-            mainGrid.add(gridIMC, 0, 6, 1, 1);
-            mainGrid.add(sendButton,2,7,2,2);
+            mainGrid.add(gridIMC, 0, 7, 1, 1);
+            mainGrid.add(sendButton,0,10,2,2);
+        mainGrid.setStyle("-fx-background-color: #dddddd;");
 
             sendButton.setOnAction(actionEvent -> validateSurvey());
-        mainGrid.add(lbl12,0,8,2,2);
             setContent(mainGrid);
-
+            sendButton.getStyleClass().add("sendButton");
+        sendLbl = new Label();
+        sendLbl.getStyleClass().add("container");
+        sendLbl.setVisible(false);
+        
+        mainGrid.add(sendLbl,0,13,1,1);
+        mainGrid.setId("main");
     }
 
 
     @Override
     public boolean validateSurvey() {
+        StringBuilder errorMessage = new StringBuilder("Error en la encuesta: ");
         int contadorDeErrores = 0;
         String text = txt1.getText();
-        if (text.isEmpty()) contadorDeErrores++;
-        if (combo1.getValue() == null) contadorDeErrores++;
-        if (combo2.getValue() == null) contadorDeErrores++;
-        if (toggleGroup.getSelectedToggle() == null) contadorDeErrores++;
+        if (text.isEmpty()) {
+            contadorDeErrores++;
+            errorMessage.append("comida favorita, ");
+            txt1.setStyle("-fx-background-color: #e74c4c;");
+        }
+        if (combo1.getValue() == null) {
+            contadorDeErrores++;
+            errorMessage.append("Sabor Favorito, ");
+            combo1.setStyle("-fx-background-color: #e74c4c;");
+        }
+        if (combo2.getValue() == null) {
+            contadorDeErrores++;
+            errorMessage.append("Comidas diarias, ");
+            combo2.setStyle("-fx-background-color: #e74c4c;");
+        }
+        if (toggleGroup.getSelectedToggle() == null) {
+            errorMessage.append("marca una respuesta, ");
+            contadorDeErrores++;
+        }
+        text = slider1.getText();
+        if(text.isEmpty()){
+            contadorDeErrores++;
+            errorMessage.append("horno, ");
+            slider1.setStyle("-fx-background-color: #e74c4c;");
+        }
+        text = slider2.getText();
+        if(text.isEmpty()){
+            contadorDeErrores++;
+            errorMessage.append("Plancha, ");
+            slider2.setStyle("-fx-background-color: #e74c4c;");
+        }
+        text = slider3.getText();
+        if(text.isEmpty()){
+            contadorDeErrores++;
+            errorMessage.append("Olla, ");
+            slider3.setStyle("-fx-background-color: #e74c4c;");
+        }
+
+
 
 
         if (contadorDeErrores == 0) {
-            createCSVFile(getData(),"Comidas");
-            lbl12.setText("");
+            createCSVFile(getData(), "Comidas");
         }else{
-            lbl12.setText("Existen errores en tus respuestas.");
-            lbl12.setVisible(true);
+            System.out.println(contadorDeErrores);
+            sendLbl.setVisible(true);
+            errorMessage.setLength(errorMessage.length() - 1);
+            sendLbl.setText(errorMessage.toString());
+            System.out.println(errorMessage.toString());
         }
-
         return true;
     }
 

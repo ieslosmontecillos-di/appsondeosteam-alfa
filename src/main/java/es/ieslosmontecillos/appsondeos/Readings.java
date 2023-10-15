@@ -22,6 +22,7 @@ public class Readings extends Survey {
     ToggleGroup genderToggle;
     RadioButton maleRadio;
     RadioButton femaleRadio;
+    private Label sendLbl;
 
     public Readings(){
         setText("Lecturas");
@@ -41,7 +42,7 @@ public class Readings extends Survey {
         mainGrid.setPadding(new Insets(100, 100, 100, 100));
 
         try {
-            mainGrid.getStylesheets().add(Objects.requireNonNull(Sports.class.getResource("css/Sports.css")).toExternalForm());
+            mainGrid.getStylesheets().add(Objects.requireNonNull(Readings.class.getResource("css/Readings.css")).toExternalForm());
             mainGrid.setId("main");
         } catch(NullPointerException e){
             System.out.println("No se ha podido añadir el css a la aplicación");
@@ -51,6 +52,7 @@ public class Readings extends Survey {
 
 
         GridPane gridInfo = new GridPane();
+        gridInfo.getStyleClass().add("container");
         gridInfo.setVgap(5);
 
 
@@ -94,6 +96,7 @@ public class Readings extends Survey {
 
         HBox hb1;
         hb1 = new HBox(10);
+        hb1.getStyleClass().add("container");
 
         chb1 = new CheckBox("¿Tienes alguna lectura en curso?");
         chb1.setFont(new Font(17));
@@ -117,9 +120,10 @@ public class Readings extends Survey {
         mainGrid.add(sep2, 0, 3, 1, 1);
 
         GridPane gridFrec;
+
         gridFrec = new GridPane();
         gridFrec.setVgap(5);
-
+        gridFrec.getStyleClass().add("container");
 
 
         Label frecTitle;
@@ -158,7 +162,7 @@ public class Readings extends Survey {
         GridPane gridIMC;
         gridIMC = new GridPane();
         gridIMC.setVgap(5);
-
+        gridIMC.getStyleClass().add("container");
         Label imcTitle = new Label("Reseña:");
         imcTitle.setFont(new Font(24));
         gridIMC.add(imcTitle, 0, 0, 1, 1);
@@ -178,38 +182,78 @@ public class Readings extends Survey {
         mainGrid.add(sendButton, 0, 8, 1, 1);
 
         sendButton.setOnAction(actionEvent -> validateSurvey());
+        sendButton.getStyleClass().add("sendButton");
+
+        //Send Label (Result)
+        sendLbl = new Label();
+        //We add the Class "container" from Journeys.css
+        sendLbl.getStyleClass().add("container");
+        sendLbl.setVisible(false);
+        mainGrid.add(sendLbl, 0, 9, 1, 1);
         setContent(mainGrid);
     }
 
     @Override
     boolean validateSurvey() {
+        StringBuilder errorMessage = new StringBuilder("Error en la encuesta: ");
 
         int contadorDeErrores = 0;
 
         String text = favBookTxt.getText();
-        if (text.isEmpty()) contadorDeErrores++;
+        if (text.isEmpty()) {
+            contadorDeErrores++;
+            errorMessage.append("libro Favorito, ");
+            favBookTxt.setStyle("-fx-background-color: #e74c4c;");
+        }
 
         text = ageTxt.getText();
-        if (text.isEmpty()) contadorDeErrores++;
+        if (text.isEmpty()) {
+            contadorDeErrores++;
+            errorMessage.append("Edad, ");
+            ageTxt.setStyle("-fx-background-color: #e74c4c;");
+        }
 
         text = lecturaTxt.getText();
-        if (text.isEmpty()) contadorDeErrores++;
+        if (text.isEmpty()&&chb1.isSelected()) {
+            contadorDeErrores++;
+            errorMessage.append("lectura En curso, ");
+            lecturaTxt.setStyle("-fx-background-color: #e74c4c;");
+        }
 
         text = libroNoTerminadoTxt.getText();
-        if (text.isEmpty()) contadorDeErrores++;
+        if (text.isEmpty()) {
+            contadorDeErrores++;
+            errorMessage.append("libro no terminado, ");
+            libroNoTerminadoTxt.setStyle("-fx-background-color: #e74c4c;");
+        }
 
         text = libroConMasPaginasTxt.getText();
-        if (text.isEmpty()) contadorDeErrores++;
+        if (text.isEmpty()) {
+            contadorDeErrores++;
+            errorMessage.append("libro con más páginas, ");
+            libroConMasPaginasTxt.setStyle("-fx-background-color: #e74c4c;");
+        }
 
         text = cantidadDePaginasTxt.getText();
-        if (text.isEmpty()) contadorDeErrores++;
+        if (text.isEmpty()) {
+            contadorDeErrores++;
+            errorMessage.append("cantidad de paginas, ");
+            cantidadDePaginasTxt.setStyle("-fx-background-color: #e74c4c;");
+        }
 
         text = textArea.getText();
-        if (text.isEmpty()) contadorDeErrores++;
+        if (text.isEmpty()) {
+            contadorDeErrores++;
+            errorMessage.append("reseña, ");
+            textArea.setStyle("-fx-background-color: #e74c4c;");
+        }
 
         if (contadorDeErrores == 0) {
             createCSVFile(getData(),"Lecturas");
             return true;
+        }else{
+            sendLbl.setVisible(true);
+            sendLbl.setText(errorMessage.toString());
         }
 
         return false;
