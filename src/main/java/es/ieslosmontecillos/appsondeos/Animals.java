@@ -296,6 +296,9 @@ public class Animals extends Survey{
 
     @Override
     String getData(){
-        return null;
+        return toggle1.getSelectedToggle() + ";" + toggle2_1.getSelectedToggle() + ";"
+                + txt1.getText() + ";" + toggle2.getSelectedToggle() + ";" +
+                toggle3.getSelectedToggle() + ";" + slider1.getValue() + ";" +
+                toggle4.getSelectedToggle() + ";" + combo1.getValue();
     }
 }
