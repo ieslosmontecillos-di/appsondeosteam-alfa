@@ -91,7 +91,7 @@ public class Journeys extends Survey
         mainGrid.setAlignment(Pos.CENTER);
         mainGrid.setHgap(10);
         mainGrid.setVgap(10);
-        mainGrid.setPadding(new Insets(100, 100, 100, 100));
+        mainGrid.setPadding(new Insets(20, 20, 20, 20));
 
         //We add the CSS Class
         mainGrid.getStylesheets().add(Journeys.class.getResource("css/Journeys.css").toExternalForm());
@@ -102,6 +102,8 @@ public class Journeys extends Survey
 
         gridInfo = new GridPane();
         gridInfo.setVgap(5);
+        //We add the Class "container" from Sports.css
+        gridInfo.getStyleClass().add("container");
 
         //Title
         titleLbl1 = new Label("Información personal");
@@ -168,6 +170,8 @@ public class Journeys extends Survey
 
         gridPref = new GridPane();
         gridPref.setVgap(5);
+        //We add the Class "container" from Sports.css
+        gridPref.getStyleClass().add("container");
 
         //Title
         titleLbl2 = new Label("Preferencias");
@@ -228,9 +232,11 @@ public class Journeys extends Survey
         //Destination - Container 1
         gridDest = new GridPane();
         gridDest.setVgap(5);
+        //We add the Class "container" from Sports.css
+        gridDest.getStyleClass().add("container");
 
         //Elements
-        destLbl1 = new Label("¿Consideras que te gusta viajar?");
+        destLbl1 = new Label("¿Considera que le gusta viajar?");
         gridDest.add(destLbl1, 0, 0, 1, 1);
 
         //Radio Buttons
@@ -249,6 +255,8 @@ public class Journeys extends Survey
         //Destination - Container 2
         hiddenGridDest = new GridPane();
         hiddenGridDest.setVgap(10);
+        //We add the Class "container" from Sports.css
+        hiddenGridDest.getStyleClass().add("container");
         hiddenGridDest.setVisible(false);
 
 
@@ -324,12 +332,22 @@ public class Journeys extends Survey
 
         mainGrid.add(hiddenGridDest, 0, 5, 1, 1);
 
+
         /* SEND */
+
+        //Send Button
         sendBtn = new Button("Enviar");
         sendBtn.setAlignment(Pos.CENTER);
+
+        //We add the Class "sendButton" from Journeys.css
+        sendBtn.getStyleClass().add("sendButton");
         mainGrid.add(sendBtn, 0, 6, 1, 1);
 
-        sendLbl = new Label("");
+        //Send Label (Result)
+        sendLbl = new Label();
+        //We add the Class "container" from Journeys.css
+        sendLbl.getStyleClass().add("container");
+        sendLbl.setVisible(false);
         mainGrid.add(sendLbl, 0, 7, 1, 1);
 
         //Finallly, we add the GridPane to this Tab
@@ -439,7 +457,7 @@ public class Journeys extends Survey
         // Delete the last comma and space of the error message
         if (!isValid)
         {
-            errorMessage.setLength(errorMessage.length() - 2);
+            errorMessage.setLength(errorMessage.length() - 1);
             sendLbl.setText(errorMessage.toString());
         }
 
@@ -521,6 +539,7 @@ public class Journeys extends Survey
 
         /* EVENT TO VALIDATE THE SURVEY */
         sendBtn.setOnAction(actionEvent -> {
+            sendLbl.setVisible(true);
             if(validateSurvey())
             {
                 sendLbl.setText("Encuesta enviada con éxito");
