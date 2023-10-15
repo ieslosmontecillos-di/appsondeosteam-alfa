@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,7 +46,7 @@ public class AppSondeos extends Application {
                                                         BackgroundRepeat.NO_REPEAT,
                                                         BackgroundRepeat.NO_REPEAT,
                                                         BackgroundPosition.DEFAULT,
-                                                        new BackgroundSize(600, 400, false, false, false, false));
+                                                        new BackgroundSize(610, 400, false, false, false, false));
         Background bGround = new Background(bgImage);
         root.setBackground(bGround);
 
