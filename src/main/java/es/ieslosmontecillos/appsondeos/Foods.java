@@ -11,9 +11,6 @@ import javafx.collections.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.NumberFormat;
 
 public class Foods extends Survey {
@@ -221,7 +218,7 @@ public class Foods extends Survey {
         System.out.println(contadorDeErrores);
 
         if (contadorDeErrores == 0) {
-            createSCVFile(getData(),"Comidas");
+            createCSVFile(getData(),"Comidas");
         }
 
         return true;
@@ -233,8 +230,8 @@ public class Foods extends Survey {
 
     }
 
-    void createSCVFile(String datos, String surveyName) {
-        super.createSCVFile(datos, surveyName);
+    void createCSVFile(String datos, String surveyName) {
+        super.createCSVFile(datos, surveyName);
     }
 }
 /*
