@@ -9,13 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.util.Objects;
+
 
 /**
  *
@@ -25,7 +23,7 @@ public class AppSondeos extends Application {
 
     @Override
 
-    public void start(Stage primaryStage) throws FileNotFoundException {
+    public void start(Stage primaryStage) {
 
         BorderPane root = new BorderPane();
         //root.getChildren().add(btnStart);
@@ -35,7 +33,7 @@ public class AppSondeos extends Application {
 
 
         /* Set the background image */
-        root.getStylesheets().add(Sports.class.getResource("css/Main.css").toExternalForm());
+        root.getStylesheets().add(Objects.requireNonNull(Sports.class.getResource("css/Main.css")).toExternalForm());
         root.setId("main");
 
         primaryStage.setTitle("Quest");
