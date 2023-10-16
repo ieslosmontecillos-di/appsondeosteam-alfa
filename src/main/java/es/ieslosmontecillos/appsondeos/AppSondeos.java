@@ -5,6 +5,8 @@
  */
 package es.ieslosmontecillos.appsondeos;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.geometry.Pos;
@@ -71,7 +73,7 @@ public class AppSondeos extends Application {
 
         /* Segunda Escena*/
         StackPane root2 = new StackPane();
-        Scene scene2 = new Scene(root2, 600, 400);
+        Scene scene2 = new Scene(root2, 610, 377);
 
         /* TabPane */
         TabPane tabPane = new TabPane();
@@ -95,11 +97,23 @@ public class AppSondeos extends Application {
         root2.getChildren().add(tabPane);
 
 
-        btnStart.setOnAction(event -> primaryStage.setScene(scene2));
+        btnStart.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                primaryStage.setScene(scene2);
+                primaryStage.setFullScreen(true);
+            }
+        });
 
         btnExit.setOnAction(actionEvent -> primaryStage.close());
 
-        menu1.setOnAction(actionEvent -> primaryStage.setScene(scene2));
+        menu1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                primaryStage.setScene(scene2);
+                primaryStage.setFullScreen(true);
+            }
+        });
 
         menu2.setOnAction(actionEvent -> primaryStage.close());
 
